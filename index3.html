@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildSol Hardware | Tools, Plumbing, Paint & Materials</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ===== ANNOUNCEMENT BAR ===== -->
+<div class="announcement-bar">
+    <div class="announcement-content">
+        <span><i class="fas fa-truck"></i> FREE DELIVERY on orders over $75</span>
+        <span class="separator">|</span>
+        <span><i class="fas fa-store"></i> 123 Builder's Lane, Craftsville</span>
+        <span class="separator">|</span>
+        <span><i class="fas fa-phone"></i> (555) 123-4567</span>
+        <span class="separator">|</span>
+        <span><i class="fas fa-clock"></i> Mon–Fri 7AM–9PM &nbsp;|&nbsp; Sat–Sun 8AM–7PM</span>
+    </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header class="main-header">
+    <div class="header-container">
+        <div class="logo">
+            <a href="index.html">
+                <i class="fas fa-hammer"></i>
+                <span>Build<strong>Sol</strong></span>
+            </a>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search tools, plumbing, paint, materials…">
+            <button type="button"><i class="fas fa-search"></i></button>
+        </div>
+        <nav class="header-actions">
+            <a href="#" class="action-link"><i class="fas fa-map-marker-alt"></i><span>Store Locator</span></a>
+            <a href="#" class="action-link"><i class="fas fa-user"></i><span>Account</span></a>
+            <a href="#" class="action-link cart-link"><i class="fas fa-shopping-cart"></i><span>Cart</span><span class="cart-count">3</span></a>
+        </nav>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></button>
+    </div>
+    <nav class="main-nav">
+        <ul class="nav-list">
+            <li class="nav-item dropdown">
+                <a href="power-tools.html">Power Tools <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-menu">
+                    <div class="dropdown-column"><h4>Drills & Drivers</h4><a href="#">Cordless Drills</a><a href="#">Impact Drivers</a><a href="#">Hammer Drills</a><a href="#">Drill Bit Sets</a></div>
+                    <div class="dropdown-column"><h4>Saws & Cutting</h4><a href="#">Circular Saws</a><a href="#">Jigsaws</a><a href="#">Reciprocating Saws</a><a href="#">Angle Grinders</a></div>
+                    <div class="dropdown-column"><h4>Finishing</h4><a href="#">Sanders & Polishers</a><a href="#">Routers</a><a href="#">Nail Guns</a><a href="#">Heat Guns</a></div>
+                    <div class="dropdown-column"><h4>Accessories</h4><a href="#">Batteries & Chargers</a><a href="#">Blades & Discs</a><a href="#">Combo Kits</a><a href="#">Cases & Storage</a></div>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="plumbing.html">Plumbing <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-menu">
+                    <div class="dropdown-column"><h4>Pipes & Fittings</h4><a href="#">PVC Pipes</a><a href="#">CPVC Pipes</a><a href="#">Copper Pipes</a><a href="#">Push-Fit Fittings</a></div>
+                    <div class="dropdown-column"><h4>Fixtures</h4><a href="#">Faucets & Taps</a><a href="#">Showerheads</a><a href="#">Toilets & Cisterns</a><a href="#">Sinks & Basins</a></div>
+                    <div class="dropdown-column"><h4>Water Heating</h4><a href="#">Geyser Units</a><a href="#">Inline Heaters</a><a href="#">Valves & Stopcocks</a><a href="#">Drain Solutions</a></div>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="building-materials.html">Building Materials <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-menu">
+                    <div class="dropdown-column"><h4>Lumber & Board</h4><a href="#">Dimensional Lumber</a><a href="#">Plywood Sheets</a><a href="#">OSB Board</a><a href="#">Treated Timber</a></div>
+                    <div class="dropdown-column"><h4>Concrete & Masonry</h4><a href="#">Cement & Concrete Mix</a><a href="#">Bricks & Blocks</a><a href="#">Mortar & Grout</a><a href="#">Steel Reinforcing</a></div>
+                    <div class="dropdown-column"><h4>Roofing</h4><a href="#">Corrugated Roofing</a><a href="#">Roof Tiles</a><a href="#">Insulation</a><a href="#">Waterproofing</a></div>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="paint.html">Paint <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-menu">
+                    <div class="dropdown-column"><h4>Interior Paint</h4><a href="#">Matt Emulsion</a><a href="#">Silk & Satin</a><a href="#">Ceiling Paint</a><a href="#">Feature Wall</a></div>
+                    <div class="dropdown-column"><h4>Exterior Paint</h4><a href="#">Masonry Paint</a><a href="#">Wood Stain</a><a href="#">Anti-Rust Paint</a><a href="#">Waterproof Coatings</a></div>
+                    <div class="dropdown-column"><h4>Supplies</h4><a href="#">Rollers & Brushes</a><a href="#">Primers & Undercoats</a><a href="#">Painter's Tape</a><a href="#">Paint Trays & Kits</a></div>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#">Electrical <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-menu">
+                    <div class="dropdown-column"><h4>Wiring</h4><a href="#">Electrical Cable</a><a href="#">Conduit & Trunking</a><a href="#">Junction Boxes</a></div>
+                    <div class="dropdown-column"><h4>Devices</h4><a href="#">Switches & Sockets</a><a href="#">Circuit Breakers</a><a href="#">Distribution Boards</a></div>
+                </div>
+            </li>
+            <li class="nav-item"><a href="#">Hardware</a></li>
+            <li class="nav-item"><a href="#">Outdoor</a></li>
+            <li class="nav-item highlight"><a href="#"><i class="fas fa-tags"></i> Deals</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Mobile Nav -->
+<nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-header"><span>Menu</span><button class="mobile-nav-close" id="mobileNavClose"><i class="fas fa-times"></i></button></div>
+    <ul class="mobile-nav-list">
+        <li><a href="power-tools.html">Power Tools</a></li>
+        <li><a href="plumbing.html">Plumbing</a></li>
+        <li><a href="building-materials.html">Building Materials</a></li>
+        <li><a href="paint.html">Paint</a></li>
+        <li><a href="#">Electrical</a></li>
+        <li><a href="#">Hardware</a></li>
+        <li><a href="#">Outdoor</a></li>
+        <li><a href="#" class="highlight"><i class="fas fa-tags"></i> Deals</a></li>
+    </ul>
+</nav>
+<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+
+<!-- ===== PROMO STRIP ===== -->
+<div class="promo-strip">
+    <div class="promo-strip-inner">
+        <div class="promo-strip-item"><i class="fas fa-bolt"></i> Flash Sale — 40% Off DeWalt Power Tools</div>
+        <div class="promo-strip-item"><i class="fas fa-tint"></i> Plumbing Week — 20% Off All Fixtures</div>
+        <div class="promo-strip-item"><i class="fas fa-paint-roller"></i> Buy 2 Paints, Get 1 Free</div>
+        <div class="promo-strip-item"><i class="fas fa-cubes"></i> New In — Rapid-Set Concrete Mix</div>
+        <div class="promo-strip-item"><i class="fas fa-truck"></i> Free Delivery Orders Over $75</div>
+        <div class="promo-strip-item"><i class="fas fa-credit-card"></i> 0% Finance on Orders $299+</div>
+        <div class="promo-strip-item"><i class="fas fa-bolt"></i> Flash Sale — 40% Off DeWalt Power Tools</div>
+        <div class="promo-strip-item"><i class="fas fa-tint"></i> Plumbing Week — 20% Off All Fixtures</div>
+        <div class="promo-strip-item"><i class="fas fa-paint-roller"></i> Buy 2 Paints, Get 1 Free</div>
+        <div class="promo-strip-item"><i class="fas fa-cubes"></i> New In — Rapid-Set Concrete Mix</div>
+        <div class="promo-strip-item"><i class="fas fa-truck"></i> Free Delivery Orders Over $75</div>
+        <div class="promo-strip-item"><i class="fas fa-credit-card"></i> 0% Finance on Orders $299+</div>
+    </div>
+</div>
+
+<main>
+
+<!-- ===== HERO SLIDER ===== -->
+<section class="hero-section">
+    <div class="hero-slider" id="heroSlider">
+        <div class="slide active">
+            <div class="slide-background" style="background-image:url('https://images.unsplash.com/photo-1504148455328-c376907d081c?w=1600&q=80')"></div>
+            <div class="slide-content">
+                <span class="slide-tag">Summer Sale</span>
+                <h1>Power Tools<br>Up to 40% Off</h1>
+                <p>Professional-grade cordless tools from DeWalt, Milwaukee & Makita. Limited time.</p>
+                <div class="slide-buttons"><a href="power-tools.html" class="btn btn-primary">Shop Power Tools</a><a href="#" class="btn btn-outline">View All Deals</a></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-background" style="background-image:url('https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=1600&q=80')"></div>
+            <div class="slide-content">
+                <span class="slide-tag">Plumbing Week</span>
+                <h1>20% Off All<br>Plumbing Fixtures</h1>
+                <p>Faucets, showerheads, toilets and more. Quality brands at unbeatable prices.</p>
+                <div class="slide-buttons"><a href="plumbing.html" class="btn btn-primary">Shop Plumbing</a><a href="#" class="btn btn-outline">Learn More</a></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-background" style="background-image:url('https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=1600&q=80')"></div>
+            <div class="slide-content">
+                <span class="slide-tag">Paint Sale</span>
+                <h1>Buy 2 Get 1 Free<br>On All Paints</h1>
+                <p>Interior, exterior, primers and stains. Over 2,000 colour options in store.</p>
+                <div class="slide-buttons"><a href="paint.html" class="btn btn-primary">Shop Paint</a><a href="#" class="btn btn-outline">Colour Guide</a></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-background" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80')"></div>
+            <div class="slide-content">
+                <span class="slide-tag">New Arrivals</span>
+                <h1>Fresh Stock:<br>Building Materials</h1>
+                <p>Rapid-set concrete, new plywood grades, treated timber and more just landed.</p>
+                <div class="slide-buttons"><a href="building-materials.html" class="btn btn-primary">Explore Materials</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="slider-controls">
+        <button class="slider-arrow prev" id="sliderPrev"><i class="fas fa-chevron-left"></i></button>
+        <div class="slider-dots" id="sliderDots">
+            <button class="dot active"></button><button class="dot"></button><button class="dot"></button><button class="dot"></button>
+        </div>
+        <button class="slider-arrow next" id="sliderNext"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    <aside class="promo-sidebar">
+        <div class="promo-card"><div class="promo-icon"><i class="fas fa-percent"></i></div><div class="promo-info"><h4>Weekly Deals</h4><p>Save up to 50%</p></div><a href="#" class="promo-link"><i class="fas fa-arrow-right"></i></a></div>
+        <div class="promo-card featured"><div class="promo-icon"><i class="fas fa-bolt"></i></div><div class="promo-info"><h4>Flash Sale</h4><p>Ends in <span class="countdown" id="flashCountdown">02:45:30</span></p></div><a href="#" class="promo-link"><i class="fas fa-arrow-right"></i></a></div>
+        <div class="promo-card"><div class="promo-icon"><i class="fas fa-paint-roller"></i></div><div class="promo-info"><h4>Paint Special</h4><p>Buy 2, Get 1 Free</p></div><a href="#" class="promo-link"><i class="fas fa-arrow-right"></i></a></div>
+        <div class="promo-card"><div class="promo-icon"><i class="fas fa-credit-card"></i></div><div class="promo-info"><h4>0% Financing</h4><p>On orders $299+</p></div><a href="#" class="promo-link"><i class="fas fa-arrow-right"></i></a></div>
+    </aside>
+</section>
+
+<!-- ===== CATEGORIES ===== -->
+<section class="categories-section">
+    <div class="section-container">
+        <div class="section-header"><h2>Shop By Category</h2><a href="#" class="view-all">All Categories <i class="fas fa-arrow-right"></i></a></div>
+        <div class="categories-grid">
+            <a href="power-tools.html" class="category-card"><div class="category-image"><img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&q=80" alt="Power Tools"></div><div class="category-info"><h3>Power Tools</h3><span>250+ Products</span></div></a>
+            <a href="plumbing.html" class="category-card"><div class="category-image"><img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=400&q=80" alt="Plumbing"></div><div class="category-info"><h3>Plumbing</h3><span>180+ Products</span></div></a>
+            <a href="building-materials.html" class="category-card"><div class="category-image"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Building Materials"></div><div class="category-info"><h3>Building Materials</h3><span>320+ Products</span></div></a>
+            <a href="paint.html" class="category-card"><div class="category-image"><img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&q=80" alt="Paint"></div><div class="category-info"><h3>Paint & Finishes</h3><span>200+ Products</span></div></a>
+            <a href="#" class="category-card"><div class="category-image"><img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&q=80" alt="Electrical"></div><div class="category-info"><h3>Electrical</h3><span>150+ Products</span></div></a>
+            <a href="#" class="category-card"><div class="category-image"><img src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=400&q=80" alt="Hardware"></div><div class="category-info"><h3>Hardware & Fixings</h3><span>400+ Products</span></div></a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== NEW ARRIVALS BANNER ===== -->
+<section class="new-products-banner">
+    <div class="banner-container">
+        <div class="banner-content">
+            <span class="banner-tag"><i class="fas fa-star"></i> Just Arrived</span>
+            <h2>New Products Collection</h2>
+            <p>Fresh stock just landed — innovative power tools, updated plumbing systems, and the latest paint ranges from industry-leading brands.</p>
+            <a href="#" class="btn btn-primary">Explore New Arrivals</a>
+        </div>
+        <div class="banner-products">
+            <div class="floating-product" style="--delay:0s"><img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=300&q=80" alt="Tool"></div>
+            <div class="floating-product" style="--delay:0.5s"><img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=300&q=80" alt="Plumbing"></div>
+            <div class="floating-product" style="--delay:1s"><img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=300&q=80" alt="Paint"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FEATURED PRODUCTS ===== -->
+<section class="products-section">
+    <div class="section-container">
+        <div class="section-header">
+            <h2><i class="fas fa-fire"></i> Featured Products</h2>
+            <div class="product-tabs">
+                <button class="tab-btn active">Best Sellers</button>
+                <button class="tab-btn">New Arrivals</button>
+                <button class="tab-btn">Top Deals</button>
+            </div>
+        </div>
+        <div class="products-grid">
+            <div class="product-card"><div class="product-badges"><span class="badge sale">-25%</span><span class="badge bestseller">Best Seller</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&q=80" alt="DeWalt Drill"></div><div class="product-info"><span class="product-brand">DeWalt</span><h3 class="product-name">20V MAX Cordless Drill/Driver Kit</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><span class="rating-count">(248)</span></div><div class="product-price"><span class="current-price">$149.99</span><span class="original-price">$199.99</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
+            <div class="product-card"><div class="product-badges"><span class="badge new">New</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=400&q=80" alt="Milwaukee Impact Driver"></div><div class="product-info"><span class="product-brand">Milwaukee</span><h3 class="product-name">M18 FUEL Impact Driver (Tool Only)</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-count">(156)</span></div><div class="product-price"><span class="current-price">$229.00</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
+            <div class="product-card"><div class="product-badges"><span class="badge promo">20% Off</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=400&q=80" alt="Grohe Faucet"></div><div class="product-info"><span class="product-brand">Grohe</span><h3 class="product-name">Concetto Single-Lever Basin Mixer</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div><span class="rating-count">(94)</span></div><div class="product-price"><span class="current-price">$89.99</span><span class="original-price">$112.00</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
+            <div class="product-card"><div class="product-badges"><span class="badge new">New Range</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&q=80" alt="Dulux Paint"></div><div class="product-info"><span class="product-brand">Dulux</span><h3 class="product-name">Easycare Washable Matt Emulsion — 5L</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-count">(312)</span></div><div class="product-price"><span class="current-price">$34.99</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
+        </div>
+        <div class="view-more-container"><a href="#" class="btn btn-secondary">View All Products <i class="fas fa-arrow-right"></i></a></div>
+    </div>
+</section>
+
+<!-- ===== SPECIAL OFFERS ===== -->
+<section class="special-offers">
+    <div class="section-container">
+        <div class="section-header"><h2><i class="fas fa-tags"></i> Special Offers</h2></div>
+        <div class="offers-grid">
+            <div class="offer-card large"><div class="offer-background" style="background-image:url('https://images.unsplash.com/photo-1504148455328-c376907d081c?w=800&q=80')"></div><div class="offer-content"><span class="offer-tag">Limited Time</span><h3>Pro Tool Collection</h3><p>Save up to 40% on professional-grade power tools from top brands</p><a href="power-tools.html" class="btn btn-primary">Shop Collection</a></div></div>
+            <div class="offer-card"><div class="offer-background" style="background-image:url('https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&q=80')"></div><div class="offer-content"><span class="offer-tag">Paint Sale</span><h3>Buy 2 Get 1 Free</h3><p>On all interior paints this month</p><a href="paint.html" class="btn btn-outline">Shop Paint</a></div></div>
+            <div class="offer-card"><div class="offer-background" style="background-image:url('https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&q=80')"></div><div class="offer-content"><span class="offer-tag">Plumbing Week</span><h3>20% Off Fixtures</h3><p>Faucets, showers & more</p><a href="plumbing.html" class="btn btn-outline">Shop Now</a></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== POWER TOOLS SECTION ===== -->
+<section class="dept-section">
+    <div class="section-container">
+        <div class="section-header"><div class="dept-header-left"><div class="dept-header-icon"><i class="fas fa-bolt"></i></div><h2>Power Tools</h2></div><a href="power-tools.html" class="view-all">All Power Tools <i class="fas fa-arrow-right"></i></a></div>
+        <div class="products-grid">
+            <div class="product-card"><div class="product-badges"><span class="badge sale">-40%</span><span class="badge bestseller">Best Seller</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1597484661973-ee6cd0b6482c?w=400&q=80" alt="Makita Circular Saw"></div><div class="product-info"><span class="product-brand">Makita</span><h3 class="product-name">7-1/4" Circular Saw with LED Guide</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-count">(312)</span></div><div class="product-price"><span class="current-price">$107.00</span><span class="original-price">$179.00</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
+            <div class="product-card"><div class="product-badges"><span class="badge new">New</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&q=80" alt="Bosch Jigsaw"></div><div class="product-info"><span class="product-brand">Bosch</span><h3 class="product-name">Professional Jigsaw PST 900 PEL</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div><span class="rating-count">(78)</span></div><div class="product-price"><span class="current-price">$129.00</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
+            <div class="product-card"><div class="product-badges"><span class="badge sale">-30%</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=400&q=80" alt="Ryobi Sander"></div><div class="product-info"><span class="product-brand">Ryobi</span><h3 class="product-name">ONE+ 18V Orbital Sander Kit</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><span class="rating-count">(141)</span></div><div class="product-price"><span class="current-price">$69.99</span><span class="original-price">$99.99</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
+            <div class="product-card"><div class="product-badges"><span class="badge bundle">Bundle Deal</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="DeWalt Combo Kit"></div><div class="product-info"><span class="product-brand">DeWalt</span><h3 class="product-name">20V MAX 5-Tool Combo Kit</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-count">(205)</span></div><div class="product-price"><span class="current-price">$399.00</span><span class="original-price">$499.00</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
+        </div>
+        <div class="view-more-container"><a href="power-tools.html" class="btn btn-secondary">View All Power Tools <i class="fas fa-arrow-right"></i></a></div>
+    </div>
+</section>
+
+<!-- ===== PLUMBING SECTION ===== -->
+<section class="dept-section">
+    <div class="section-container">
+        <div class="section-header"><div class="dept-header-left"><div class="dept-header-icon"><i class="fas fa-tint"></i></div><h2>Plumbing</h2></div><a href="plumbing.html" class="view-all">All Plumbing <i class="fas fa-arrow-right"></i></a></div>
+        <div class="products-grid">
+            <div class="product-card"><div class="product-badges"><span class="badge promo">20% Off</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=400&q=80" alt="Shower"></div><div class="product-info"><span class="product-brand">Hansgrohe</span><h3 class="product-name">Raindance Select S Overhead Shower 240</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-count">(67)</span></div><div class="product-price"><span class="current-price">$159.00</span><span class="original-price">$199.00</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
+            <div class="product-card"><div class="product-badges"><span class="badge new">New</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=400&q=80" alt="Pipes"></div><div class="product-info"><span class="product-brand">Wavin</span><h3 class="product-name">CPVC Hot & Cold Pipe Bundle — 3m</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div><span class="rating-count">(29)</span></div><div class="product-price"><span class="current-price">$24.50</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
+            <div class="product-card"><div class="product-badges"><span class="badge sale">-15%</span><span class="badge bestseller">Best Seller</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=400&q=80" alt="Toilet"></div><div class="product-info"><span class="product-brand">Armitage Shanks</span><h3 class="product-name">Close-Coupled Toilet Suite — White</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><span class="rating-count">(183)</span></div><div class="product-price"><span class="current-price">$339.00</span><span class="original-price">$399.00</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
+            <div class="product-card"><div class="product-badges"><span class="badge new">New</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=400&q=80" alt="Water Heater"></div><div class="product-info"><span class="product-brand">Rheem</span><h3 class="product-name">16L Instant Gas Water Heater</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-count">(52)</span></div><div class="product-price"><span class="current-price">$449.00</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
+        </div>
+        <div class="view-more-container"><a href="plumbing.html" class="btn btn-secondary">View All Plumbing <i class="fas fa-arrow-right"></i></a></div>
+    </div>
+</section>
+
+<!-- ===== BUILDING MATERIALS SECTION ===== -->
+<section class="dept-section">
+    <div class="section-container">
+        <div class="section-header"><div class="dept-header-left"><div class="dept-header-icon"><i class="fas fa-cubes"></i></div><h2>Building Materials</h2></div><a href="building-materials.html" class="view-all">All Materials <i class="fas fa-arrow-right"></i></a></div>
+        <div class="products-grid">
+            <div class="product-card"><div class="product-badges"><span class="badge new">New</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Concrete"></div><div class="product-info"><span class="product-brand">Quikrete</span><h3 class="product-name">Rapid Set Concrete Mix — 40kg</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-count">(88)</span></div><div class="product-price"><span class="current-price">$19.99</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
+            <div class="product-card"><div class="product-badges"><span class="badge sale">-20%</span><span class="badge bestseller">Best Seller</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Plywood"></div><div class="product-info"><span class="product-brand">GP Wood</span><h3 class="product-name">18mm Structural Plywood Sheet 2400×1200</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div><span class="rating-count">(147)</span></div><div class="product-price"><span class="current-price">$55.99</span><span class="original-price">$69.99</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
+            <div class="product-card"><div class="product-badges"><span class="badge bundle">Bundle Deal</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Bricks"></div><div class="product-info"><span class="product-brand">Ibstock</span><h3 class="product-name">Engineering Bricks Class B — Per 500</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><span class="rating-count">(63)</span></div><div class="product-price"><span class="current-price">$249.00</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
+            <div class="product-card"><div class="product-badges"><span class="badge new">New</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Roof Tiles"></div><div class="product-info"><span class="product-brand">Marley</span><h3 class="product-name">Concrete Interlocking Roof Tile — Per m²</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-count">(41)</span></div><div class="product-price"><span class="current-price">$14.50</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
+        </div>
+        <div class="view-more-container"><a href="building-materials.html" class="btn btn-secondary">View All Building Materials <i class="fas fa-arrow-right"></i></a></div>
+    </div>
+</section>
+
+<!-- ===== PAINT SECTION ===== -->
+<section class="dept-section">
+    <div class="section-container">
+        <div class="section-header"><div class="dept-header-left"><div class="dept-header-icon"><i class="fas fa-paint-roller"></i></div><h2>Paint & Finishes</h2></div><a href="paint.html" class="view-all">All Paint <i class="fas fa-arrow-right"></i></a></div>
+        <div class="products-grid">
+            <div class="product-card"><div class="product-badges"><span class="badge promo">Buy 2 Get 1</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&q=80" alt="Dulux Matt"></div><div class="product-info"><span class="product-brand">Dulux</span><h3 class="product-name">Easycare Washable Matt — 5L (Any Colour)</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-count">(422)</span></div><div class="product-price"><span class="current-price">$34.99</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
+            <div class="product-card"><div class="product-badges"><span class="badge new">New Colour Range</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&q=80" alt="Sandtex"></div><div class="product-info"><span class="product-brand">Sandtex</span><h3 class="product-name">Ultra Smooth Masonry Paint — 10L</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><span class="rating-count">(198)</span></div><div class="product-price"><span class="current-price">$52.00</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
+            <div class="product-card"><div class="product-badges"><span class="badge sale">-25%</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&q=80" alt="Anti-Rust"></div><div class="product-info"><span class="product-brand">Hammerite</span><h3 class="product-name">Direct to Rust Metal Paint — 750ml</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div><span class="rating-count">(76)</span></div><div class="product-price"><span class="current-price">$14.99</span><span class="original-price">$19.99</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
+            <div class="product-card"><div class="product-badges"><span class="badge bestseller">Best Seller</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&q=80" alt="Roller Kit"></div><div class="product-info"><span class="product-brand">Harris</span><h3 class="product-name">Ultimate Walls & Ceilings Roller Kit</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-count">(289)</span></div><div class="product-price"><span class="current-price">$18.50</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
+        </div>
+        <div class="view-more-container"><a href="paint.html" class="btn btn-secondary">View All Paint & Finishes <i class="fas fa-arrow-right"></i></a></div>
+    </div>
+</section>
+
+<!-- ===== STORE INFO ===== -->
+<section class="store-info-banner">
+    <div class="banner-container">
+        <div class="store-info-grid">
+            <div class="store-info-card"><div class="info-icon"><i class="fas fa-store"></i></div><h3>Visit Our Store</h3><p>123 Builder's Lane<br>Craftsville, ST 12345</p><a href="#" class="info-link">Get Directions <i class="fas fa-arrow-right"></i></a></div>
+            <div class="store-info-card"><div class="info-icon"><i class="fas fa-clock"></i></div><h3>Store Hours</h3><p>Mon–Fri: 7AM – 9PM<br>Sat–Sun: 8AM – 7PM</p><a href="#" class="info-link">All Locations <i class="fas fa-arrow-right"></i></a></div>
+            <div class="store-info-card"><div class="info-icon"><i class="fas fa-headset"></i></div><h3>Need Help?</h3><p>Our experts are ready<br>to assist you</p><a href="#" class="info-link">Contact Us <i class="fas fa-arrow-right"></i></a></div>
+            <div class="store-info-card"><div class="info-icon"><i class="fas fa-tools"></i></div><h3>Pro Services</h3><p>Tool rental, cutting,<br>delivery & installation</p><a href="#" class="info-link">Learn More <i class="fas fa-arrow-right"></i></a></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== BRANDS ===== -->
+<section class="brands-section">
+    <div class="section-container">
+        <h2>Shop Top Brands</h2>
+        <div class="brands-slider">
+            <div class="brand-logo"><img src="https://via.placeholder.com/120x40?text=DeWalt" alt="DeWalt"></div>
+            <div class="brand-logo"><img src="https://via.placeholder.com/120x40?text=Milwaukee" alt="Milwaukee"></div>
+            <div class="brand-logo"><img src="https://via.placeholder.com/120x40?text=Makita" alt="Makita"></div>
+            <div class="brand-logo"><img src="https://via.placeholder.com/120x40?text=Bosch" alt="Bosch"></div>
+            <div class="brand-logo"><img src="https://via.placeholder.com/120x40?text=Ryobi" alt="Ryobi"></div>
+            <div class="brand-logo"><img src="https://via.placeholder.com/120x40?text=Dulux" alt="Dulux"></div>
+            <div class="brand-logo"><img src="https://via.placeholder.com/120x40?text=Grohe" alt="Grohe"></div>
+            <div class="brand-logo"><img src="https://via.placeholder.com/120x40?text=Stanley" alt="Stanley"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== NEWSLETTER ===== -->
+<section class="newsletter-section">
+    <div class="section-container">
+        <div class="newsletter-content">
+            <div class="newsletter-text"><h2>Join Our Newsletter</h2><p>Get exclusive deals, DIY tips, and new product alerts delivered to your inbox.</p></div>
+            <form class="newsletter-form" onsubmit="return false;"><input type="email" placeholder="Enter your email address" required><button type="submit" class="btn btn-primary">Subscribe</button></form>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-grid">
+            <div class="footer-column"><div class="footer-logo"><i class="fas fa-hammer"></i><span>Build<strong>Sol</strong></span></div><p class="footer-description">Your trusted partner for quality tools, plumbing, paint, and building materials since 1985.</p><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-pinterest"></i></a></div></div>
+            <div class="footer-column"><h4>Shop</h4><ul><li><a href="#">All Products</a></li><li><a href="#">New Arrivals</a></li><li><a href="#">Best Sellers</a></li><li><a href="#">Deals & Clearance</a></li><li><a href="#">Gift Cards</a></li></ul></div>
+            <div class="footer-column"><h4>Services</h4><ul><li><a href="#">Tool Rental</a></li><li><a href="#">Installation Services</a></li><li><a href="#">Pro Services</a></li><li><a href="#">DIY Workshops</a></li><li><a href="#">Project Calculator</a></li></ul></div>
+            <div class="footer-column"><h4>Support</h4><ul><li><a href="#">Contact Us</a></li><li><a href="#">FAQs</a></li><li><a href="#">Shipping Info</a></li><li><a href="#">Returns & Exchanges</a></li><li><a href="#">Track Order</a></li></ul></div>
+            <div class="footer-column"><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Store Locations</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li><li><a href="#">Sustainability</a></li></ul></div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-legal"><p>&copy; 2025 BuildSol Hardware. All rights reserved.</p><div class="legal-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Accessibility</a></div></div>
+            <div class="payment-methods"><img src="https://via.placeholder.com/50x28?text=Visa" alt="Visa"><img src="https://via.placeholder.com/50x28?text=MC" alt="Mastercard"><img src="https://via.placeholder.com/50x28?text=Amex" alt="Amex"><img src="https://via.placeholder.com/50x28?text=PayPal" alt="PayPal"><img src="https://via.placeholder.com/50x28?text=Apple" alt="Apple Pay"></div>
+        </div>
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

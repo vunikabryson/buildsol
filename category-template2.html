@@ -1,0 +1,750 @@
+bash
+cat > /home/claude/category-template-v2.html << 'HTMLEOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-cat-title>Plumbing — BuildSol Hardware</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+  /* ============================================================
+     CATEGORY PAGE — SCOPED STYLES
+     (Extends styles.css without touching shared rules)
+  ============================================================ */
+
+  /* ── Breadcrumb ── */
+  .breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--gray-400);margin-bottom:1rem;font-family:var(--font-heading)}
+  .breadcrumb a{color:var(--gold-400);transition:color var(--transition-fast)}
+  .breadcrumb a:hover{color:var(--gold-300)}
+  .breadcrumb i{font-size:.625rem}
+
+  /* ── Hero stat pills ── */
+  .hero-stats{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:1.5rem}
+  .hero-stat{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--gray-300)}
+  .hero-stat i{color:var(--gold-400)}
+  .hero-stat strong{color:#fff;font-family:var(--font-heading)}
+  .hero-ctas{display:flex;gap:1rem;margin-top:1.75rem;flex-wrap:wrap}
+
+  /* ── Sub-cat quick nav ── */
+  .quick-nav{background:#fff;border-bottom:2px solid var(--gray-100);padding:.75rem 0;position:sticky;top:72px;z-index:99}
+  .quick-nav-inner{max-width:var(--container-max);margin:0 auto;padding:0 var(--container-padding);display:flex;align-items:center;gap:.5rem;overflow-x:auto;scrollbar-width:none}
+  .quick-nav-inner::-webkit-scrollbar{display:none}
+  .qnav-label{font-family:var(--font-heading);font-size:.75rem;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;padding-right:1rem;border-right:2px solid var(--gray-200);margin-right:.5rem;flex-shrink:0}
+  .qnav-pill{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem .9rem;border-radius:999px;background:var(--gray-100);border:2px solid transparent;font-family:var(--font-heading);font-size:.8rem;font-weight:600;color:var(--gray-700);white-space:nowrap;transition:all var(--transition-fast);cursor:pointer;text-decoration:none;flex-shrink:0}
+  .qnav-pill i{font-size:.85rem;color:var(--navy-500)}
+  .qnav-pill:hover{background:var(--navy-50);border-color:var(--navy-300);color:var(--navy-700)}
+  .qnav-pill.active{background:var(--navy-700);border-color:var(--navy-700);color:#fff}
+  .qnav-pill.active i{color:var(--gold-400)}
+
+  /* ── Sub-category showcase grid ── */
+  .subcat-section{padding:3rem 0;background:#fff}
+  .subcat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+  .subcat-card{position:relative;border-radius:var(--radius-lg);overflow:hidden;background:var(--gray-50);border:2px solid var(--gray-200);transition:all var(--transition-normal);text-decoration:none;display:block}
+  .subcat-card:hover{border-color:var(--gold-400);transform:translateY(-6px);box-shadow:var(--shadow-xl)}
+  .subcat-img{height:130px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--navy-800),var(--navy-700));position:relative;overflow:hidden}
+  .subcat-img::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(230,168,0,.15) 0%,transparent 60%)}
+  .subcat-img i{font-size:2.75rem;color:var(--gold-400);position:relative;z-index:1;transition:transform var(--transition-normal)}
+  .subcat-card:hover .subcat-img i{transform:scale(1.15)}
+  .subcat-body{padding:.875rem}
+  .subcat-body h3{font-size:.9rem;color:var(--navy-800);margin-bottom:.2rem}
+  .subcat-body span{font-size:.8rem;color:var(--gray-500)}
+  .subcat-arrow{position:absolute;bottom:.875rem;right:.875rem;width:26px;height:26px;border-radius:50%;background:var(--navy-700);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.7rem;opacity:0;transform:translateX(-4px);transition:all var(--transition-fast)}
+  .subcat-card:hover .subcat-arrow{opacity:1;transform:translateX(0)}
+
+  /* ── Brand strip ── */
+  .brand-strip{background:var(--gray-50);border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200);padding:.875rem 0}
+  .brand-strip-inner{max-width:var(--container-max);margin:0 auto;padding:0 var(--container-padding);display:flex;align-items:center;gap:2.5rem}
+  .brand-strip-label{font-family:var(--font-heading);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gray-500);white-space:nowrap}
+  .brand-list{display:flex;align-items:center;gap:2.5rem;overflow-x:auto;scrollbar-width:none;flex:1}
+  .brand-list::-webkit-scrollbar{display:none}
+  .brand-item{font-family:var(--font-heading);font-size:.95rem;font-weight:800;color:var(--gray-300);white-space:nowrap;transition:all var(--transition-fast);cursor:pointer;letter-spacing:.04em;padding:.25rem .5rem;border-radius:var(--radius-sm);border:2px solid transparent}
+  .brand-item:hover,.brand-item.active-brand{color:var(--navy-700);border-color:var(--navy-200);background:var(--navy-50)}
+
+  /* ── Promo deal banner ── */
+  .deal-banner{background:linear-gradient(135deg,var(--navy-800),var(--navy-900));border-radius:var(--radius-xl);padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;position:relative;overflow:hidden;margin-bottom:2rem}
+  .deal-banner::before{content:'';position:absolute;top:-30%;right:30%;width:300px;height:300px;background:radial-gradient(circle,rgba(230,168,0,.12) 0%,transparent 70%)}
+  .deal-banner::after{content:'';position:absolute;bottom:-40%;right:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(230,168,0,.06) 0%,transparent 70%)}
+  .deal-text{position:relative;z-index:1}
+  .deal-tag{display:inline-flex;align-items:center;gap:.4rem;background:var(--gold-500);color:var(--navy-900);padding:.3rem .875rem;border-radius:999px;font-family:var(--font-heading);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem}
+  .deal-text h2{font-size:1.625rem;color:#fff;margin-bottom:.4rem}
+  .deal-text p{color:var(--gray-300);font-size:.9375rem;max-width:400px}
+  .deal-actions{display:flex;gap:.875rem;margin-top:1.125rem}
+  .deal-stats{position:relative;z-index:1;display:flex;gap:.875rem;flex-shrink:0}
+  .deal-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-lg);padding:1rem 1.375rem;text-align:center;min-width:100px}
+  .deal-stat-num{font-family:var(--font-heading);font-size:1.75rem;font-weight:800;color:var(--gold-400);display:block;line-height:1}
+  .deal-stat-lbl{font-size:.75rem;color:var(--gray-400);margin-top:.25rem}
+
+  /* ── Layout: sidebar + grid ── */
+  .cat-layout-wrap{padding:2.5rem 0;background:var(--gray-50)}
+  .cat-layout{display:grid;grid-template-columns:272px 1fr;gap:1.75rem;align-items:start}
+
+  /* ── Sidebar ── */
+  .cat-sidebar{position:sticky;top:130px}
+  .sidebar-widget{background:#fff;border-radius:var(--radius-lg);overflow:hidden;margin-bottom:1.25rem;box-shadow:var(--shadow-sm);border:1px solid var(--gray-200)}
+  .sw-head{background:var(--navy-800);padding:.875rem 1.25rem;display:flex;align-items:center;gap:.5rem}
+  .sw-head h3{font-size:.875rem;color:#fff;font-weight:700}
+  .sw-head i{color:var(--gold-400);font-size:.875rem}
+  .sw-body{padding:1.25rem}
+
+  /* Filter groups */
+  .fg{margin-bottom:1.25rem}
+  .fg:last-child{margin-bottom:0}
+  .fg-title{font-family:var(--font-heading);font-size:.75rem;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.625rem}
+  .fc-list{display:flex;flex-direction:column;gap:.375rem}
+  .fc-item{display:flex;align-items:center;gap:.5rem;cursor:pointer;padding:.2rem 0}
+  .fc-item input[type=checkbox]{width:15px;height:15px;accent-color:var(--navy-700);cursor:pointer;flex-shrink:0}
+  .fc-item label{font-size:.85rem;color:var(--gray-700);cursor:pointer;flex:1}
+  .fc-count{font-size:.75rem;color:var(--gray-400);font-family:var(--font-heading)}
+
+  /* Toggle switch */
+  .toggle-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:.625rem}
+  .toggle-lbl{font-size:.85rem;color:var(--gray-700);font-weight:500}
+  .ts{position:relative;width:38px;height:20px}
+  .ts input{opacity:0;width:0;height:0}
+  .ts-slider{position:absolute;inset:0;background:var(--gray-300);border-radius:20px;cursor:pointer;transition:all var(--transition-fast)}
+  .ts-slider::before{content:'';position:absolute;left:3px;top:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:transform var(--transition-fast);box-shadow:var(--shadow-sm)}
+  .ts input:checked+.ts-slider{background:var(--navy-700)}
+  .ts input:checked+.ts-slider::before{transform:translateX(18px)}
+
+  /* Price slider */
+  .pr-wrap{padding:.25rem 0}
+  .pr-labels{display:flex;justify-content:space-between;font-family:var(--font-heading);font-size:.875rem;font-weight:700;color:var(--navy-800);margin-bottom:.375rem}
+  input.price-slider{width:100%;accent-color:var(--navy-700);cursor:pointer}
+
+  /* Sidebar clear */
+  .sw-clear{width:100%;padding:.5rem;background:transparent;border:2px solid var(--gray-200);border-radius:var(--radius-md);font-family:var(--font-heading);font-size:.8rem;font-weight:600;color:var(--gray-600);cursor:pointer;transition:all var(--transition-fast);margin-top:1rem}
+  .sw-clear:hover{border-color:var(--error);color:var(--error)}
+
+  /* ── Active filter tags ── */
+  .active-filters{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;min-height:32px}
+  .af-label{font-family:var(--font-heading);font-size:.75rem;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+  .af-tag{display:inline-flex;align-items:center;gap:.375rem;padding:.25rem .7rem;background:var(--navy-50);border:1px solid var(--navy-200);border-radius:999px;font-size:.8rem;font-family:var(--font-heading);color:var(--navy-700);font-weight:600}
+  .af-tag button{background:none;border:none;cursor:pointer;color:var(--navy-400);font-size:.8rem;line-height:1;padding:0;display:flex;align-items:center}
+  .af-tag button:hover{color:var(--error)}
+  .af-clear-all{font-family:var(--font-heading);font-size:.8rem;font-weight:700;color:var(--error);cursor:pointer;background:none;border:none;padding:0;margin-left:auto;white-space:nowrap;transition:opacity var(--transition-fast)}
+  .af-clear-all:hover{opacity:.7}
+
+  /* ── Results header ── */
+  .results-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;padding-bottom:.875rem;border-bottom:2px solid var(--gray-200);flex-wrap:wrap;gap:.75rem}
+  .results-count{font-family:var(--font-heading);font-size:.9rem;color:var(--gray-600)}
+  .results-count strong{color:var(--navy-900);font-size:1.0625rem}
+  .results-controls{display:flex;align-items:center;gap:.875rem}
+  .view-toggle{display:flex;border:2px solid var(--gray-200);border-radius:var(--radius-md);overflow:hidden}
+  .vt-btn{padding:.375rem .7rem;background:transparent;color:var(--gray-400);border:none;cursor:pointer;transition:all var(--transition-fast);font-size:.875rem;display:flex;align-items:center}
+  .vt-btn.active{background:var(--navy-700);color:#fff}
+
+  /* ── Products grid LIST mode ── */
+  .products-grid.list-view{grid-template-columns:1fr}
+  .products-grid.list-view .product-card{display:grid;grid-template-columns:220px 1fr}
+  .products-grid.list-view .product-image{height:100%}
+  .products-grid.list-view .product-info{display:flex;flex-direction:column;justify-content:center}
+
+  /* ── Buy Now button ── */
+  .buy-now{flex:1;padding:var(--spacing-sm) var(--spacing-md);background:linear-gradient(135deg,var(--gold-500),var(--gold-600));color:var(--navy-900);font-family:var(--font-heading);font-size:.8125rem;font-weight:700;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;gap:var(--spacing-sm);transition:all var(--transition-fast)}
+  .buy-now:hover{background:linear-gradient(135deg,var(--gold-400),var(--gold-500));transform:translateY(-1px)}
+
+  /* ── Pagination ── */
+  .pagination{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--gray-200)}
+  .pg-btn{width:40px;height:40px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-family:var(--font-heading);font-size:.875rem;font-weight:600;color:var(--gray-600);border:2px solid var(--gray-200);background:#fff;cursor:pointer;transition:all var(--transition-fast)}
+  .pg-btn:hover:not(:disabled){border-color:var(--navy-400);color:var(--navy-700)}
+  .pg-btn.active{background:var(--navy-700);border-color:var(--navy-700);color:#fff}
+  .pg-btn:disabled{color:var(--gray-300);border-color:var(--gray-100);cursor:not-allowed}
+  .pg-ellipsis{color:var(--gray-400);padding:0 .25rem}
+
+  /* ── Quick-view modal ── */
+  #qv-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:5000;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;visibility:hidden;transition:all .25s ease}
+  #qv-overlay.open{opacity:1;visibility:visible}
+  #qv-modal{background:#fff;border-radius:var(--radius-xl);width:min(760px,100%);max-height:90vh;overflow:auto;position:relative;transform:scale(.92);transition:transform .28s cubic-bezier(.22,1,.36,1)}
+  #qv-overlay.open #qv-modal{transform:scale(1)}
+  .qv-grid{display:grid;grid-template-columns:1fr 1fr}
+  .qv-img{display:flex;align-items:center;justify-content:center;min-height:320px;border-radius:var(--radius-xl) 0 0 var(--radius-xl)}
+  .qv-img i{font-size:5rem}
+  .qv-body{padding:2rem 1.75rem;display:flex;flex-direction:column;justify-content:center}
+  .qv-brand{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gray-400);font-family:var(--font-heading);font-weight:600;margin-bottom:.25rem}
+  .qv-name{font-family:var(--font-heading);font-size:1.2rem;color:var(--navy-800);margin-bottom:.75rem;line-height:1.3}
+  .qv-rating{display:flex;align-items:center;gap:.5rem;margin-bottom:1rem}
+  .qv-rating .stars{color:var(--gold-500)}
+  .qv-price{display:flex;align-items:baseline;gap:.625rem;margin-bottom:1.125rem}
+  .qv-price .current-price{font-size:1.875rem}
+  .qv-qty-row{display:flex;align-items:center;gap:.875rem;margin-bottom:1.125rem}
+  .qty-ctrl{display:flex;align-items:center;border:2px solid var(--gray-200);border-radius:var(--radius-md);overflow:hidden}
+  .qty-ctrl button{width:34px;height:34px;background:none;border:none;cursor:pointer;font-size:1rem;color:var(--gray-700);transition:background var(--transition-fast);display:flex;align-items:center;justify-content:center}
+  .qty-ctrl button:hover{background:var(--gray-100)}
+  .qty-ctrl span{width:34px;text-align:center;font-family:var(--font-heading);font-weight:700;font-size:.9375rem}
+  .qv-actions{display:flex;flex-direction:column;gap:.625rem}
+  .qv-close-btn{position:absolute;top:1rem;right:1rem;background:var(--gray-100);border:none;width:34px;height:34px;border-radius:50%;cursor:pointer;color:var(--gray-600);display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all var(--transition-fast)}
+  .qv-close-btn:hover{background:var(--gray-200);color:var(--gray-800)}
+
+  /* ── Cart drawer ── */
+  #cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:3000;opacity:0;visibility:hidden;transition:all .3s ease}
+  #cart-overlay.open{opacity:1;visibility:visible}
+  #cart-drawer{position:fixed;top:0;right:0;height:100vh;width:min(430px,100vw);background:#fff;z-index:3001;display:flex;flex-direction:column;box-shadow:-8px 0 32px rgba(0,0,0,.15);transform:translateX(100%);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+  #cart-drawer.open{transform:translateX(0)}
+  .cd-head{display:flex;align-items:center;justify-content:space-between;padding:1.125rem 1.5rem;border-bottom:2px solid var(--gray-200);background:var(--navy-900);flex-shrink:0}
+  .cd-head h2{font-family:var(--font-heading);font-size:1.05rem;color:#fff;font-weight:700;display:flex;align-items:center;gap:.5rem}
+  .cd-head h2 i{color:var(--gold-400)}
+  .cd-head-count{background:var(--gold-500);color:var(--navy-900);font-size:.7rem;font-weight:800;padding:2px 7px;border-radius:999px}
+  .cd-close{background:rgba(255,255,255,.1);border:none;color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background var(--transition-fast)}
+  .cd-close:hover{background:rgba(255,255,255,.2)}
+  .cd-items{flex:1;overflow-y:auto;padding:.875rem 1.5rem}
+  .cd-empty{text-align:center;padding:3rem 1.5rem;color:var(--gray-500)}
+  .cd-empty i{font-size:3rem;color:var(--gray-200);display:block;margin-bottom:1rem}
+  .cd-empty p{font-family:var(--font-heading);font-weight:700;color:var(--gray-700);margin-bottom:.5rem}
+  .cd-item{display:flex;gap:.875rem;padding:.875rem 0;border-bottom:1px solid var(--gray-100)}
+  .cd-item-img{width:68px;height:68px;border-radius:var(--radius-md);background:var(--gray-100);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.75rem;color:var(--gray-400)}
+  .cd-item-info{flex:1;min-width:0}
+  .cd-item-brand{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gray-400);font-family:var(--font-heading);font-weight:600}
+  .cd-item-name{font-size:.875rem;font-weight:600;color:var(--navy-800);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:.2rem 0 .5rem}
+  .cd-item-row{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+  .cd-qty{display:flex;align-items:center;border:2px solid var(--gray-200);border-radius:6px;overflow:hidden}
+  .cd-qty button{width:26px;height:26px;background:none;border:none;cursor:pointer;color:var(--gray-700);font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:background var(--transition-fast)}
+  .cd-qty button:hover{background:var(--gray-100)}
+  .cd-qty span{width:26px;text-align:center;font-family:var(--font-heading);font-weight:700;font-size:.8125rem}
+  .cd-item-price{font-family:var(--font-heading);font-weight:700;color:var(--navy-800);font-size:.9rem;white-space:nowrap}
+  .cd-remove{background:none;border:none;cursor:pointer;color:var(--gray-300);font-size:.8125rem;transition:color var(--transition-fast);display:flex;align-items:center}
+  .cd-remove:hover{color:var(--error)}
+  .cd-footer{border-top:2px solid var(--gray-200);padding:1.25rem 1.5rem;background:var(--gray-50);flex-shrink:0}
+  .cd-ship-bar{margin-bottom:1rem}
+  .cd-ship-bar p{font-size:.8rem;color:var(--gray-600);margin-bottom:.375rem}
+  .cd-ship-track{height:5px;background:var(--gray-200);border-radius:999px;overflow:hidden}
+  .cd-ship-fill{height:100%;background:linear-gradient(90deg,var(--gold-500),var(--gold-400));border-radius:999px;transition:width .4s ease}
+  .cd-ship-ok{background:var(--success);background:none;color:var(--success);font-size:.8rem;display:flex;align-items:center;gap:.375rem;font-weight:600}
+  .cd-totals{display:flex;justify-content:space-between;align-items:center;margin-bottom:.375rem}
+  .cd-totals span:first-child{font-size:.875rem;color:var(--gray-600)}
+  .cd-totals span:last-child{font-family:var(--font-heading);font-weight:700;font-size:1.0625rem;color:var(--navy-800)}
+  .cd-note{font-size:.75rem;color:var(--gray-400);margin-bottom:1rem}
+  .cd-checkout{width:100%;padding:.875rem;background:linear-gradient(135deg,var(--gold-500),var(--gold-600));color:var(--navy-900);border:none;border-radius:var(--radius-md);font-family:var(--font-heading);font-size:.9375rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.625rem;transition:all var(--transition-fast)}
+  .cd-checkout:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(230,168,0,.35)}
+  .cd-view{width:100%;padding:.75rem;background:transparent;color:var(--navy-700);border:2px solid var(--navy-300);border-radius:var(--radius-md);font-family:var(--font-heading);font-size:.875rem;font-weight:600;cursor:pointer;transition:all var(--transition-fast)}
+  .cd-view:hover{background:var(--navy-50)}
+
+  /* ── Toast ── */
+  #toast-stack{position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;display:flex;flex-direction:column;gap:.625rem;pointer-events:none}
+  .toast{display:flex;align-items:center;gap:.75rem;background:#fff;border-radius:10px;padding:.875rem 1.125rem;box-shadow:0 8px 24px rgba(0,0,0,.13);min-width:270px;max-width:360px;pointer-events:all;transform:translateX(120%);opacity:0;transition:transform .3s cubic-bezier(.22,1,.36,1),opacity .3s ease;font-size:.875rem;color:var(--gray-800);font-family:var(--font-body)}
+  .toast.show{transform:translateX(0);opacity:1}
+  .toast-icon{font-size:1rem;flex-shrink:0}
+  .toast-msg{flex:1}
+  .toast-close{background:none;border:none;cursor:pointer;color:var(--gray-400);font-size:.9rem;padding:0;display:flex;align-items:center;pointer-events:all}
+  .toast-close:hover{color:var(--gray-700)}
+
+  /* ── WhatsApp float ── */
+  #wa-float{position:fixed;bottom:1.5rem;left:1.5rem;width:50px;height:50px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.4rem;z-index:900;box-shadow:0 4px 16px rgba(37,211,102,.4);transition:transform .2s,box-shadow .2s;text-decoration:none}
+  #wa-float:hover{transform:scale(1.1);box-shadow:0 6px 22px rgba(37,211,102,.5)}
+
+  /* ── Scroll-to-top ── */
+  #scroll-top{position:fixed;bottom:4.5rem;right:1.5rem;width:42px;height:42px;border-radius:50%;background:var(--navy-700);color:#fff;border:none;cursor:pointer;z-index:900;display:flex;align-items:center;justify-content:center;font-size:.9rem;box-shadow:var(--shadow-lg);opacity:0;visibility:hidden;transition:all .3s ease}
+  #scroll-top.show{opacity:1;visibility:visible}
+
+  /* ── No-results ── */
+  .no-results{grid-column:1/-1;text-align:center;padding:3rem 1rem}
+  .no-results i{font-size:3rem;color:var(--gray-300);display:block;margin-bottom:1rem}
+  .no-results h3{color:var(--navy-800);margin-bottom:.5rem}
+  .no-results p{color:var(--gray-500);font-size:.9375rem}
+
+  /* ── Responsive ── */
+  @media(max-width:1024px){.subcat-grid{grid-template-columns:repeat(3,1fr)}.cat-layout{grid-template-columns:240px 1fr}}
+  @media(max-width:768px){.subcat-grid{grid-template-columns:repeat(2,1fr)}.cat-layout{grid-template-columns:1fr}.cat-sidebar{position:static}.deal-banner{flex-direction:column;text-align:center}.deal-stats{justify-content:center}.deal-actions{justify-content:center}.qv-grid{grid-template-columns:1fr}.qv-img{border-radius:var(--radius-xl) var(--radius-xl) 0 0;min-height:200px}.hero-stats{gap:1rem}}
+  @media(max-width:480px){.subcat-grid{grid-template-columns:repeat(2,1fr)}.hero-ctas{flex-direction:column}}
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     TOAST STACK
+════════════════════════════════════════════════════════════ -->
+<div id="toast-stack" aria-live="assertive" aria-atomic="true"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     QUICK-VIEW MODAL
+════════════════════════════════════════════════════════════ -->
+<div id="qv-overlay" role="dialog" aria-modal="true" aria-label="Quick product view">
+  <div id="qv-modal">
+    <button class="qv-close-btn" id="qvClose" aria-label="Close"><i class="fas fa-xmark"></i></button>
+    <div class="qv-grid" id="qvContent"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     CART DRAWER
+════════════════════════════════════════════════════════════ -->
+<div id="cart-overlay"></div>
+<aside id="cart-drawer" role="dialog" aria-modal="true" aria-label="Shopping cart">
+  <div class="cd-head">
+    <h2><i class="fas fa-cart-shopping"></i> Your Cart <span class="cd-head-count" id="cdHeadCount"></span></h2>
+    <button class="cd-close" id="cdClose" aria-label="Close cart"><i class="fas fa-xmark"></i></button>
+  </div>
+  <div class="cd-items" id="cdItems"></div>
+  <div class="cd-footer" id="cdFooter"></div>
+</aside>
+
+<!-- ══════════════════════════════════════════════════════════
+     ANNOUNCEMENT BAR
+════════════════════════════════════════════════════════════ -->
+<div class="announcement-bar">
+  <div class="announcement-content">
+    <span><i class="fas fa-truck-fast"></i> Free delivery on orders over R1,500</span>
+    <span class="separator">|</span>
+    <span><i class="fas fa-phone"></i> 0800 BUILDSOL</span>
+    <span class="separator">|</span>
+    <span><i class="fas fa-clock"></i> Mon–Sat 7am–6pm · Sun 8am–4pm</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     PROMO MARQUEE
+════════════════════════════════════════════════════════════ -->
+<div class="promo-strip">
+  <div class="promo-strip-inner">
+    <div class="promo-strip-item"><i class="fas fa-bolt"></i> Power Tools Up to 30% Off</div>
+    <div class="promo-strip-item"><i class="fas fa-droplet"></i> Plumbing Week Deals</div>
+    <div class="promo-strip-item"><i class="fas fa-paint-roller"></i> Paint Mix In-Store</div>
+    <div class="promo-strip-item"><i class="fas fa-bolt"></i> Power Tools Up to 30% Off</div>
+    <div class="promo-strip-item"><i class="fas fa-droplet"></i> Plumbing Week Deals</div>
+    <div class="promo-strip-item"><i class="fas fa-paint-roller"></i> Paint Mix In-Store</div>
+    <div class="promo-strip-item"><i class="fas fa-hard-hat"></i> Safety Gear Specials</div>
+    <div class="promo-strip-item"><i class="fas fa-star"></i> Loyalty Points Every Purchase</div>
+    <div class="promo-strip-item"><i class="fas fa-hard-hat"></i> Safety Gear Specials</div>
+    <div class="promo-strip-item"><i class="fas fa-star"></i> Loyalty Points Every Purchase</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════════════════════ -->
+<header class="main-header">
+  <div class="header-container">
+    <div class="logo">
+      <a href="index.html">
+        <i class="fas fa-helmet-safety"></i>
+        Build<strong>Sol</strong>
+      </a>
+    </div>
+    <div class="search-bar" id="searchBar">
+      <input type="text" id="searchInput" placeholder="Search products, brands, categories…" autocomplete="off" aria-label="Search products">
+      <button id="searchBtn" aria-label="Search"><i class="fas fa-search"></i></button>
+    </div>
+    <div class="header-actions">
+      <a href="#" class="action-link" id="wishlistLink">
+        <i class="fas fa-heart"></i>
+        <span>Wishlist</span>
+      </a>
+      <a href="#" class="action-link cart-link" id="cartToggle">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Cart</span>
+        <span class="cart-count" id="cartBadge">0</span>
+      </a>
+      <button class="mobile-menu-toggle" id="mobileToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════════
+     MAIN NAV
+════════════════════════════════════════════════════════════ -->
+<nav class="main-nav" aria-label="Main navigation">
+  <ul class="nav-list">
+    <li class="nav-item" data-cat-nav="plumbing"><a href="plumbing.html">Plumbing</a></li>
+    <li class="nav-item" data-cat-nav="electrical"><a href="electrical.html">Electrical</a></li>
+    <li class="nav-item" data-cat-nav="power-tools"><a href="power-tools.html">Power Tools</a></li>
+    <li class="nav-item" data-cat-nav="building-materials"><a href="building-materials.html">Building Materials</a></li>
+    <li class="nav-item dropdown">
+      <a href="#">More <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown-menu">
+        <div class="dropdown-column">
+          <h4>Safety</h4>
+          <a href="#">Protective Gear</a>
+          <a href="#">Safety Signs</a>
+          <a href="#">First Aid</a>
+        </div>
+        <div class="dropdown-column">
+          <h4>Garden</h4>
+          <a href="#">Irrigation</a>
+          <a href="#">Garden Tools</a>
+          <a href="#">Outdoor Living</a>
+        </div>
+        <div class="dropdown-column">
+          <h4>Paint</h4>
+          <a href="#">Interior Paints</a>
+          <a href="#">Exterior Coatings</a>
+          <a href="#">Primers & Sealers</a>
+        </div>
+      </div>
+    </li>
+    <li class="nav-item highlight"><a href="#">Today's Deals</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════
+     MOBILE NAV
+════════════════════════════════════════════════════════════ -->
+<div class="mobile-nav-overlay" id="mobileOverlay"></div>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+  <div class="mobile-nav-header">
+    <span><i class="fas fa-helmet-safety" style="color:var(--gold-400);margin-right:6px"></i>BuildSol</span>
+    <button class="mobile-nav-close" id="mobileClose" aria-label="Close menu"><i class="fas fa-xmark"></i></button>
+  </div>
+  <ul class="mobile-nav-list">
+    <li><a href="#" class="highlight">Today's Deals</a></li>
+    <li><a href="plumbing.html">Plumbing</a></li>
+    <li><a href="electrical.html">Electrical</a></li>
+    <li><a href="power-tools.html">Power Tools</a></li>
+    <li><a href="building-materials.html">Building Materials</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════
+     PAGE HERO
+     data-category drives all dynamic content below
+════════════════════════════════════════════════════════════ -->
+<section class="page-hero" id="pageHero" data-category="plumbing">
+  <div class="page-hero-content">
+    <div class="page-hero-text">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <span id="heroBreadcrumb">Plumbing</span>
+      </nav>
+      <h1 id="heroTitle">Plumbing</h1>
+      <p id="heroDesc">Professional-grade pipes, fittings, taps, geysers and drainage — everything a plumber or builder needs.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><i class="fas fa-box"></i><strong id="heroProductCount">2,400+</strong> products</div>
+        <div class="hero-stat"><i class="fas fa-tag"></i><strong id="heroSaleCount">320+</strong> on sale</div>
+        <div class="hero-stat"><i class="fas fa-truck-fast"></i><strong>Same-day</strong> dispatch</div>
+        <div class="hero-stat"><i class="fas fa-shield-check"></i><strong>SABS</strong> approved</div>
+      </div>
+      <div class="hero-ctas">
+        <a href="#products" class="btn btn-primary"><i class="fas fa-layer-group"></i> Shop All</a>
+        <a href="#" class="btn btn-outline"><i class="fas fa-percent"></i> View Deals</a>
+      </div>
+    </div>
+    <div class="page-hero-icon" aria-hidden="true">
+      <i id="heroIcon" class="fas fa-faucet-drip"></i>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     SUB-CATEGORY QUICK NAV
+════════════════════════════════════════════════════════════ -->
+<div class="quick-nav" role="navigation" aria-label="Sub-category shortcuts">
+  <div class="quick-nav-inner" id="quickNavInner">
+    <span class="qnav-label">Jump to</span>
+    <!-- Pills injected by JS based on category -->
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SUB-CATEGORY SHOWCASE
+════════════════════════════════════════════════════════════ -->
+<section class="subcat-section">
+  <div class="section-container">
+    <div class="section-header">
+      <h2><i class="fas fa-grid-2"></i> Shop by Category</h2>
+      <a href="#products" class="view-all">View all <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="subcat-grid" id="subcatGrid">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     BRAND FILTER STRIP
+════════════════════════════════════════════════════════════ -->
+<div class="brand-strip">
+  <div class="brand-strip-inner">
+    <span class="brand-strip-label">Top Brands</span>
+    <div class="brand-list" id="brandList">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     MAIN CONTENT — Sidebar + Products
+════════════════════════════════════════════════════════════ -->
+<section class="cat-layout-wrap" id="products">
+  <div class="section-container">
+
+    <!-- DEAL BANNER -->
+    <div class="deal-banner">
+      <div class="deal-text">
+        <span class="deal-tag"><i class="fas fa-bolt"></i> <span id="dealTagText">Plumbing Week</span></span>
+        <h2 id="dealTitle">Plumbing Week Sale</h2>
+        <p id="dealDesc">Save big on pipes, fittings, geysers and sanitary ware. Trade & retail pricing available.</p>
+        <div class="deal-actions">
+          <a href="#" class="btn btn-primary"><i class="fas fa-tag"></i> Shop Deals</a>
+          <a href="#" class="btn btn-outline">Learn More</a>
+        </div>
+      </div>
+      <div class="deal-stats">
+        <div class="deal-stat"><span class="deal-stat-num" id="dealDiscount">30%</span><div class="deal-stat-lbl">Max savings</div></div>
+        <div class="deal-stat"><span class="deal-stat-num" id="dealItems">320</span><div class="deal-stat-lbl">Items on sale</div></div>
+        <div class="deal-stat"><span class="deal-stat-num" id="dealTimer">5d 00:00</span><div class="deal-stat-lbl">Left in deal</div></div>
+      </div>
+    </div>
+
+    <div class="cat-layout">
+
+      <!-- ─── SIDEBAR ─── -->
+      <aside class="cat-sidebar" aria-label="Filter products">
+
+        <button class="btn btn-primary" id="applyFiltersBtn" style="width:100%;justify-content:center;margin-bottom:1rem;">
+          <i class="fas fa-sliders"></i> Apply Filters
+        </button>
+
+        <div class="sidebar-widget">
+          <div class="sw-head"><i class="fas fa-filter"></i><h3>Filter Products</h3></div>
+          <div class="sw-body">
+
+            <!-- Toggles -->
+            <div class="toggle-row">
+              <span class="toggle-lbl">In Stock Only</span>
+              <label class="ts"><input type="checkbox" id="filterInStock" checked><span class="ts-slider"></span></label>
+            </div>
+            <div class="toggle-row">
+              <span class="toggle-lbl">On Sale</span>
+              <label class="ts"><input type="checkbox" id="filterOnSale"><span class="ts-slider"></span></label>
+            </div>
+
+            <hr style="border:none;border-top:1px solid var(--gray-100);margin:1rem 0">
+
+            <!-- Brand checkboxes — injected by JS -->
+            <div class="fg">
+              <div class="fg-title">Brand</div>
+              <div class="fc-list" id="sidebarBrands"></div>
+            </div>
+
+            <!-- Sub-category checkboxes — injected by JS -->
+            <div class="fg">
+              <div class="fg-title">Sub-category</div>
+              <div class="fc-list" id="sidebarSubcats"></div>
+            </div>
+
+            <!-- Price range -->
+            <div class="fg">
+              <div class="fg-title">Price Range</div>
+              <div class="pr-wrap">
+                <div class="pr-labels">
+                  <span>R0</span>
+                  <span id="priceMax">R5,000</span>
+                </div>
+                <input type="range" class="price-slider" id="priceSlider" min="0" max="500000" step="1000" value="500000" aria-label="Maximum price">
+              </div>
+            </div>
+
+            <button class="sw-clear" id="clearFiltersBtn"><i class="fas fa-rotate-left"></i> Clear All Filters</button>
+          </div>
+        </div>
+
+        <!-- Help widget -->
+        <div class="sidebar-widget">
+          <div class="sw-head"><i class="fas fa-circle-question"></i><h3>Need Help?</h3></div>
+          <div class="sw-body" style="text-align:center">
+            <i class="fas fa-headset" style="font-size:2rem;color:var(--navy-400);margin-bottom:.875rem;display:block"></i>
+            <p style="font-size:.875rem;color:var(--gray-600);margin-bottom:.875rem">Our specialists are ready to assist you.</p>
+            <a href="tel:0800000000" class="btn btn-secondary" style="width:100%;justify-content:center;font-size:.875rem;padding:.625rem 1rem">
+              <i class="fas fa-phone"></i> Talk to an Expert
+            </a>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- ─── PRODUCT COLUMN ─── -->
+      <div>
+
+        <!-- Filter chips bar -->
+        <div class="filter-bar" style="position:relative;top:auto;background:transparent;border:none;padding:0;box-shadow:none;margin-bottom:1rem">
+          <div class="filter-bar-inner" style="padding:0;flex-wrap:wrap">
+            <span class="filter-label">Filter:</span>
+            <div class="filter-chips" id="filterChips">
+              <button class="chip active" data-filter="all">All</button>
+              <!-- More injected by JS -->
+            </div>
+            <select class="sort-select" id="sortSelect" aria-label="Sort products">
+              <option value="featured">Sort: Featured</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="rating">Best Rated</option>
+              <option value="newest">New Arrivals</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Active filter tags -->
+        <div class="active-filters" id="activeTags">
+          <span class="af-label">Active:</span>
+          <!-- Tags injected by JS -->
+          <button class="af-clear-all" id="clearAllTagsBtn" style="display:none">Clear all</button>
+        </div>
+
+        <!-- Results header -->
+        <div class="results-header">
+          <div class="results-count">
+            Showing <strong id="showingCount">0</strong> of <strong id="totalCount">0</strong> products
+          </div>
+          <div class="results-controls">
+            <div class="view-toggle" role="group" aria-label="View mode">
+              <button class="vt-btn active" id="gridViewBtn" aria-label="Grid view" title="Grid view"><i class="fas fa-grip"></i></button>
+              <button class="vt-btn" id="listViewBtn" aria-label="List view" title="List view"><i class="fas fa-list"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCTS GRID -->
+        <div class="products-grid" id="productsGrid"></div>
+
+        <!-- PAGINATION -->
+        <nav class="pagination" id="paginationNav" aria-label="Product pages"></nav>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     STORE INFO
+════════════════════════════════════════════════════════════ -->
+<section class="store-info-banner">
+  <div class="banner-container">
+    <div class="store-info-grid">
+      <div class="store-info-card">
+        <div class="info-icon"><i class="fas fa-truck-fast"></i></div>
+        <h3>Fast Delivery</h3>
+        <p>Same-day dispatch on orders before 2pm. Free delivery over R1,500 nationwide.</p>
+        <a href="#" class="info-link">Delivery info <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="store-info-card">
+        <div class="info-icon"><i class="fas fa-rotate-left"></i></div>
+        <h3>Easy Returns</h3>
+        <p>30-day hassle-free returns on all stock items. In-store or courier collection.</p>
+        <a href="#" class="info-link">Return policy <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="store-info-card">
+        <div class="info-icon"><i class="fas fa-headset"></i></div>
+        <h3>Expert Advice</h3>
+        <p>Trained specialists available in-store and online, Mon–Sat 7am–6pm.</p>
+        <a href="#" class="info-link">Contact us <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="store-info-card">
+        <div class="info-icon"><i class="fas fa-shield-check"></i></div>
+        <h3>Quality Guarantee</h3>
+        <p>SABS-approved and manufacturer-warranted products across all departments.</p>
+        <a href="#" class="info-link">Our promise <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     NEWSLETTER
+════════════════════════════════════════════════════════════ -->
+<section class="newsletter-section">
+  <div class="section-container">
+    <div class="newsletter-content">
+      <div class="newsletter-text">
+        <h2>Get Trade Deals First</h2>
+        <p>Subscribe for exclusive pricing, new arrivals, and expert tips.</p>
+      </div>
+      <div class="newsletter-form" id="newsletterForm">
+        <input type="email" id="newsletterEmail" placeholder="Enter your email address" aria-label="Email address">
+        <button class="btn btn-primary" id="newsletterBtn">Subscribe</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════════ -->
+<footer class="main-footer">
+  <div class="footer-container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo"><i class="fas fa-helmet-safety"></i>Build<strong>Sol</strong></div>
+        <p class="footer-description">South Africa's trusted hardware and building supplies retailer since 1998. Serving trade professionals and homeowners across Gauteng and beyond.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h4>Departments</h4>
+        <ul>
+          <li><a href="plumbing.html">Plumbing</a></li>
+          <li><a href="electrical.html">Electrical</a></li>
+          <li><a href="power-tools.html">Power Tools</a></li>
+          <li><a href="building-materials.html">Building Materials</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Customer Service</h4>
+        <ul>
+          <li><a href="#">Track My Order</a></li>
+          <li><a href="#">Returns & Refunds</a></li>
+          <li><a href="#">Delivery Info</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>For Trade</h4>
+        <ul>
+          <li><a href="#">Trade Accounts</a></li>
+          <li><a href="#">Bulk Pricing</a></li>
+          <li><a href="#">Project Quotes</a></li>
+          <li><a href="#">Credit Application</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Store Locator</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <p>© 2026 BuildSol Hardware (Pty) Ltd. All rights reserved.</p>
+        <div class="legal-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Cookie Settings</a>
+        </div>
+      </div>
+      <div class="payment-methods">
+        <span style="font-family:var(--font-heading);font-size:.75rem;color:var(--gray-600);margin-right:.5rem">We accept:</span>
+        <span style="background:var(--gray-700);color:#fff;font-family:var(--font-heading);font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:4px">VISA</span>
+        <span style="background:var(--gold-600);color:#fff;font-family:var(--font-heading);font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:4px">MC</span>
+        <span style="background:#009b77;color:#fff;font-family:var(--font-heading);font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:4px">EFT</span>
+        <span style="background:var(--navy-600);color:#fff;font-family:var(--font-heading);font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:4px">PAYFLEX</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp float -->
+<a id="wa-float" href="https://wa.me/270800000000" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
+<!-- Scroll to top -->
+<button id="scroll-top" aria-label="Scroll to top"><i class="fas fa-chevron-up"></i></button>
+
+HTMLEOF
+echo "HTML file created"
+
+Output
+HTML file created
