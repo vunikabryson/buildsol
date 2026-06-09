@@ -580,10 +580,37 @@
             .page-hero-ctas { flex-direction: column; }
         }
 
-		.page-hero{
+	.page-hero{
     position: relative;
     background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952');
     background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
+}
+
+/* Dark overlay for readability */
+.page-hero::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 1;
+}
+
+/* Keep content above overlay */
+.page-hero-content{
+    position: relative;
+    z-index: 2;
+}
+
+/* Optional: improve text readability */
+.page-hero h1,
+.page-hero p,
+.page-hero a,
+.page-hero .hero-stat{
+    color: #fff;
+}
 
 			
     </style>
