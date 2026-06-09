@@ -3,478 +3,1521 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BuildSol Hardware | Tools, Plumbing, Paint & Materials</title>
+    <title>Plumbing — BuildSol Hardware</title>
+	 <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* ===== Category Page Specific Styles ===== */
+
+        /* Hero Stats Strip */
+        .hero-stats-strip {
+            display: flex;
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-xl);
+            flex-wrap: wrap;
+        }
+        .hero-stat {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            color: var(--gray-200);
+            font-size: 0.9rem;
+        }
+        .hero-stat i { color: var(--gold-400); font-size: 1rem; }
+        .hero-stat strong { color: var(--white); font-family: var(--font-heading); font-weight: 700; }
+
+        /* Page Hero CTA Buttons */
+        .page-hero-ctas {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+            flex-wrap: wrap;
+        }
+
+        /* Quick Category Nav */
+        .cat-quick-nav {
+            background: var(--white);
+            border-bottom: 2px solid var(--gray-100);
+            padding: var(--spacing-md) 0;
+        }
+        .cat-quick-nav-inner {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .cat-quick-nav-inner::-webkit-scrollbar { display: none; }
+        .cat-nav-label {
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            white-space: nowrap;
+            padding-right: var(--spacing-md);
+            border-right: 2px solid var(--gray-200);
+            margin-right: var(--spacing-sm);
+        }
+        .cat-nav-pill {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-full);
+            background: var(--gray-100);
+            border: 2px solid transparent;
+            font-family: var(--font-heading);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            white-space: nowrap;
+            transition: all var(--transition-fast);
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .cat-nav-pill i { font-size: 0.9rem; color: var(--navy-500); }
+        .cat-nav-pill:hover { background: var(--navy-50); border-color: var(--navy-300); color: var(--navy-700); }
+        .cat-nav-pill.active { background: var(--navy-700); border-color: var(--navy-700); color: var(--white); }
+        .cat-nav-pill.active i { color: var(--gold-400); }
+
+        /* Subcategory Grid */
+        .subcategory-section {
+            padding: var(--spacing-3xl) 0;
+            background: var(--white);
+        }
+        .subcategory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-lg);
+        }
+        .subcat-card {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: var(--gray-50);
+            border: 2px solid var(--gray-200);
+            transition: all var(--transition-normal);
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+        .subcat-card:hover {
+            border-color: var(--gold-400);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+        }
+        .subcat-card-img {
+            height: 140px;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--navy-800), var(--navy-700));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .subcat-card-img::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(230,168,0,0.15) 0%, transparent 60%);
+        }
+        .subcat-card-img i {
+            font-size: 3rem;
+            color: var(--gold-400);
+            position: relative;
+            z-index: 1;
+            transition: transform var(--transition-normal);
+        }
+        .subcat-card:hover .subcat-card-img i { transform: scale(1.15); }
+        .subcat-card-body { padding: var(--spacing-md); }
+        .subcat-card-body h3 {
+            font-size: 0.9375rem;
+            color: var(--navy-800);
+            margin-bottom: 0.25rem;
+        }
+        .subcat-card-body span {
+            font-size: 0.8125rem;
+            color: var(--gray-500);
+        }
+        .subcat-card-arrow {
+            position: absolute;
+            bottom: var(--spacing-md);
+            right: var(--spacing-md);
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            background: var(--navy-700);
+            color: var(--white);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem;
+            opacity: 0;
+            transform: translateX(-4px);
+            transition: all var(--transition-fast);
+        }
+        .subcat-card:hover .subcat-card-arrow { opacity: 1; transform: translateX(0); }
+
+        /* Category Brand Strip */
+        .cat-brand-strip {
+            background: var(--gray-50);
+            border-top: 1px solid var(--gray-200);
+            border-bottom: 1px solid var(--gray-200);
+            padding: var(--spacing-lg) 0;
+        }
+        .cat-brand-strip-inner {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3xl);
+        }
+        .cat-brand-title {
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-500);
+            white-space: nowrap;
+        }
+        .cat-brands-list {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2xl);
+            overflow-x: auto;
+            scrollbar-width: none;
+            flex: 1;
+        }
+        .cat-brands-list::-webkit-scrollbar { display: none; }
+        .cat-brand-item {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--gray-300);
+            white-space: nowrap;
+            transition: all var(--transition-fast);
+            cursor: pointer;
+            letter-spacing: 0.05em;
+        }
+        .cat-brand-item:hover { color: var(--navy-600); }
+
+        /* Featured Banner inside category */
+        .cat-promo-banner {
+            background: linear-gradient(135deg, var(--navy-800) 0%, var(--navy-900) 100%);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-2xl) var(--spacing-3xl);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-xl);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: var(--spacing-2xl);
+        }
+        .cat-promo-banner::before {
+            content: '';
+            position: absolute;
+            top: -30%; right: 30%;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(230,168,0,0.12) 0%, transparent 70%);
+        }
+        .cat-promo-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -40%; right: -5%;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(230,168,0,0.06) 0%, transparent 70%);
+        }
+        .cat-promo-text { position: relative; z-index: 1; }
+        .cat-promo-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            background: var(--gold-500);
+            color: var(--navy-900);
+            padding: 0.3rem 0.875rem;
+            border-radius: var(--radius-full);
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: var(--spacing-md);
+        }
+        .cat-promo-text h2 {
+            font-size: 1.875rem;
+            color: var(--white);
+            margin-bottom: var(--spacing-sm);
+        }
+        .cat-promo-text p { color: var(--gray-300); font-size: 1rem; max-width: 420px; }
+        .cat-promo-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+        .cat-promo-visual {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            gap: var(--spacing-md);
+            flex-shrink: 0;
+        }
+        .cat-promo-stat {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg) var(--spacing-xl);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            min-width: 120px;
+        }
+        .cat-promo-stat-number {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--gold-400);
+            display: block;
+            line-height: 1;
+        }
+        .cat-promo-stat-label {
+            font-size: 0.8125rem;
+            color: var(--gray-400);
+            margin-top: 0.25rem;
+        }
+
+        /* Sidebar + Products layout */
+        .cat-content-wrap {
+            padding: var(--spacing-3xl) 0;
+            background: var(--gray-50);
+        }
+        .cat-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: var(--spacing-2xl);
+            align-items: start;
+        }
+
+        /* Sidebar */
+        .cat-sidebar {
+            position: sticky;
+            top: 130px;
+        }
+        .sidebar-widget {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+        }
+        .sidebar-widget-header {
+            background: var(--navy-800);
+            padding: var(--spacing-md) var(--spacing-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        .sidebar-widget-header h3 {
+            font-size: 0.9rem;
+            color: var(--white);
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+        .sidebar-widget-header i { color: var(--gold-400); font-size: 0.9rem; }
+        .sidebar-widget-body { padding: var(--spacing-lg); }
+
+        /* Filter Groups */
+        .filter-group { margin-bottom: var(--spacing-lg); }
+        .filter-group:last-child { margin-bottom: 0; }
+        .filter-group-title {
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: var(--spacing-sm);
+        }
+        .filter-check-list { display: flex; flex-direction: column; gap: 0.4rem; }
+        .filter-check-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            cursor: pointer;
+        }
+        .filter-check-item input[type="checkbox"] {
+            width: 16px; height: 16px;
+            accent-color: var(--navy-700);
+            cursor: pointer;
+        }
+        .filter-check-item label {
+            font-size: 0.875rem;
+            color: var(--gray-700);
+            cursor: pointer;
+            flex: 1;
+        }
+        .filter-check-count {
+            font-size: 0.75rem;
+            color: var(--gray-400);
+            font-family: var(--font-heading);
+        }
+
+        /* Price Range Slider */
+        .price-range-wrap { padding: var(--spacing-sm) 0; }
+        .price-range-labels {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-heading);
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--navy-800);
+            margin-bottom: var(--spacing-sm);
+        }
+        .price-slider {
+            width: 100%;
+            accent-color: var(--navy-700);
+            cursor: pointer;
+        }
+
+        /* Clear Filters */
+        .sidebar-clear-btn {
+            width: 100%;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: transparent;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            font-family: var(--font-heading);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            margin-top: var(--spacing-md);
+        }
+        .sidebar-clear-btn:hover { border-color: var(--error); color: var(--error); }
+
+        /* In-stock toggle */
+        .toggle-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-sm);
+        }
+        .toggle-label {
+            font-size: 0.875rem;
+            color: var(--gray-700);
+            font-weight: 500;
+        }
+        .toggle-switch {
+            position: relative;
+            width: 40px; height: 22px;
+        }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider {
+            position: absolute;
+            inset: 0;
+            background: var(--gray-300);
+            border-radius: 22px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        .toggle-slider::before {
+            content: '';
+            position: absolute;
+            left: 3px; top: 3px;
+            width: 16px; height: 16px;
+            border-radius: 50%;
+            background: var(--white);
+            transition: transform var(--transition-fast);
+            box-shadow: var(--shadow-sm);
+        }
+        .toggle-switch input:checked + .toggle-slider { background: var(--navy-700); }
+        .toggle-switch input:checked + .toggle-slider::before { transform: translateX(18px); }
+
+        /* Product Results Header */
+        .cat-results-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 2px solid var(--gray-200);
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+        }
+        .cat-results-count {
+            font-family: var(--font-heading);
+            font-size: 0.9375rem;
+            color: var(--gray-600);
+        }
+        .cat-results-count strong { color: var(--navy-900); font-size: 1.125rem; }
+        .cat-results-controls {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        .view-toggle {
+            display: flex;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+        .view-toggle-btn {
+            padding: 0.4rem 0.75rem;
+            background: transparent;
+            color: var(--gray-400);
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-size: 0.875rem;
+        }
+        .view-toggle-btn.active { background: var(--navy-700); color: var(--white); }
+
+        /* Active filters tags */
+        .active-filters {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+            margin-bottom: var(--spacing-lg);
+        }
+        .active-filters-label {
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .active-filter-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: 0.3rem 0.75rem;
+            background: var(--navy-50);
+            border: 1px solid var(--navy-200);
+            border-radius: var(--radius-full);
+            font-size: 0.8125rem;
+            font-family: var(--font-heading);
+            color: var(--navy-700);
+            font-weight: 600;
+        }
+        .active-filter-tag button {
+            color: var(--navy-400);
+            font-size: 0.75rem;
+            line-height: 1;
+            transition: color var(--transition-fast);
+            padding: 0;
+        }
+        .active-filter-tag button:hover { color: var(--error); }
+        .clear-all-filters {
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--error);
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            margin-left: auto;
+            transition: opacity var(--transition-fast);
+        }
+        .clear-all-filters:hover { opacity: 0.7; }
+
+        /* Pagination */
+        .cat-pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-3xl);
+            padding-top: var(--spacing-xl);
+            border-top: 1px solid var(--gray-200);
+        }
+        .page-btn {
+            width: 42px; height: 42px;
+            border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-heading);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            border: 2px solid var(--gray-200);
+            background: var(--white);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        .page-btn:hover { border-color: var(--navy-400); color: var(--navy-700); }
+        .page-btn.active { background: var(--navy-700); border-color: var(--navy-700); color: var(--white); }
+        .page-btn.arrow { color: var(--navy-500); }
+        .page-btn.arrow:disabled { color: var(--gray-300); border-color: var(--gray-100); cursor: not-allowed; }
+        .page-ellipsis { color: var(--gray-400); padding: 0 var(--spacing-xs); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .subcategory-grid { grid-template-columns: repeat(3, 1fr); }
+            .cat-layout { grid-template-columns: 240px 1fr; }
+        }
+        @media (max-width: 768px) {
+            .subcategory-grid { grid-template-columns: repeat(2, 1fr); }
+            .cat-layout { grid-template-columns: 1fr; }
+            .cat-sidebar { position: static; }
+            .cat-promo-banner { flex-direction: column; text-align: center; }
+            .cat-promo-visual { justify-content: center; }
+            .cat-promo-actions { justify-content: center; }
+        }
+        @media (max-width: 480px) {
+            .subcategory-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-stats-strip { gap: var(--spacing-md); }
+            .page-hero-ctas { flex-direction: column; }
+        }
+    </style>
 </head>
 <body>
 
-<!-- ===== ANNOUNCEMENT BAR ===== -->
+<!-- ===== Announcement Bar ===== -->
 <div class="announcement-bar">
     <div class="announcement-content">
-        <span><i class="fas fa-truck"></i> FREE DELIVERY on orders over $75</span>
+        <span><i class="fas fa-truck-fast"></i> Free delivery on orders over R1,500</span>
         <span class="separator">|</span>
-        <span><i class="fas fa-store"></i> 123 Builder's Lane, Craftsville</span>
+        <span><i class="fas fa-phone"></i> Call us: 0800 BUILDSOL</span>
         <span class="separator">|</span>
-        <span><i class="fas fa-phone"></i> (555) 123-4567</span>
-        <span class="separator">|</span>
-        <span><i class="fas fa-clock"></i> Mon–Fri 7AM–9PM &nbsp;|&nbsp; Sat–Sun 8AM–7PM</span>
+        <span><i class="fas fa-clock"></i> Mon–Sat 7am–6pm · Sun 8am–4pm</span>
     </div>
 </div>
 
-<!-- ===== HEADER ===== -->
+<!-- ===== Promo Strip ===== -->
+<div class="promo-strip">
+    <div class="promo-strip-inner">
+        <div class="promo-strip-item"><i class="fas fa-bolt"></i> Power Tools Up to 30% Off</div>
+        <div class="promo-strip-item"><i class="fas fa-droplet"></i> Plumbing Week Deals</div>
+        <div class="promo-strip-item"><i class="fas fa-paint-roller"></i> Paint Mix In-Store</div>
+        <div class="promo-strip-item"><i class="fas fa-hard-hat"></i> Safety Gear Specials</div>
+        <div class="promo-strip-item"><i class="fas fa-star"></i> Loyalty Points on Every Purchase</div>
+        <div class="promo-strip-item"><i class="fas fa-bolt"></i> Power Tools Up to 30% Off</div>
+        <div class="promo-strip-item"><i class="fas fa-droplet"></i> Plumbing Week Deals</div>
+        <div class="promo-strip-item"><i class="fas fa-paint-roller"></i> Paint Mix In-Store</div>
+        <div class="promo-strip-item"><i class="fas fa-hard-hat"></i> Safety Gear Specials</div>
+        <div class="promo-strip-item"><i class="fas fa-star"></i> Loyalty Points on Every Purchase</div>
+    </div>
+</div>
+
+<!-- ===== Header ===== -->
 <header class="main-header">
     <div class="header-container">
         <div class="logo">
             <a href="index.html">
-                <i class="fas fa-hammer"></i>
-                <span>Build<strong>Sol</strong></span>
+                <i class="fas fa-helmet-safety"></i>
+                Build<strong>Sol</strong>
             </a>
         </div>
+
         <div class="search-bar">
-            <input type="text" placeholder="Search tools, plumbing, paint, materials…">
-            <button type="button"><i class="fas fa-search"></i></button>
+            <input type="text" placeholder="Search plumbing fittings, pipes, tools…">
+            <button><i class="fas fa-search"></i></button>
         </div>
-        <nav class="header-actions">
-            <a href="#" class="action-link"><i class="fas fa-map-marker-alt"></i><span>Store Locator</span></a>
-            <!--<a href="#" class="action-link"><i class="fas fa-user"></i><span>Account</span></a>-->
-	    <a href="#registerForm" class="action-link" id="accountBtn"><i class="fas fa-user"></i><span>Account</span></a>
-            <a href="#" class="action-link cart-link"><i class="fas fa-shopping-cart"></i><span>Cart</span><span class="cart-count">3</span></a>
-        </nav>
-        <button class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></button>
+
+        <div class="header-actions">
+            <a href="#" class="action-link">
+                <i class="fas fa-user"></i>
+                <span>Account</span>
+            </a>
+            <a href="#" class="action-link">
+                <i class="fas fa-heart"></i>
+                <span>Wishlist</span>
+            </a>
+            <a href="#" class="action-link cart-link">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Cart</span>
+                <span class="cart-count">3</span>
+            </a>
+            <button class="mobile-menu-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
     </div>
-    <nav class="main-nav">
-        <ul class="nav-list">
-            <li class="nav-item dropdown">
-                <a href="power-tools.html">Power Tools <i class="fas fa-chevron-down"></i></a>
-                <div class="dropdown-menu">
-                    <div class="dropdown-column"><h4>Drills & Drivers</h4><a href="#">Cordless Drills</a><a href="#">Impact Drivers</a><a href="#">Hammer Drills</a><a href="#">Drill Bit Sets</a></div>
-                    <div class="dropdown-column"><h4>Saws & Cutting</h4><a href="#">Circular Saws</a><a href="#">Jigsaws</a><a href="#">Reciprocating Saws</a><a href="#">Angle Grinders</a></div>
-                    <div class="dropdown-column"><h4>Finishing</h4><a href="#">Sanders & Polishers</a><a href="#">Routers</a><a href="#">Nail Guns</a><a href="#">Heat Guns</a></div>
-                    <div class="dropdown-column"><h4>Accessories</h4><a href="#">Batteries & Chargers</a><a href="#">Blades & Discs</a><a href="#">Combo Kits</a><a href="#">Cases & Storage</a></div>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="plumbing.html">Plumbing <i class="fas fa-chevron-down"></i></a>
-                <div class="dropdown-menu">
-                    <div class="dropdown-column"><h4>Pipes & Fittings</h4><a href="#">PVC Pipes</a><a href="#">CPVC Pipes</a><a href="#">Copper Pipes</a><a href="#">Push-Fit Fittings</a></div>
-                    <div class="dropdown-column"><h4>Fixtures</h4><a href="#">Faucets & Taps</a><a href="#">Showerheads</a><a href="#">Toilets & Cisterns</a><a href="#">Sinks & Basins</a></div>
-                    <div class="dropdown-column"><h4>Water Heating</h4><a href="#">Geyser Units</a><a href="#">Inline Heaters</a><a href="#">Valves & Stopcocks</a><a href="#">Drain Solutions</a></div>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="building-materials.html">Building Materials <i class="fas fa-chevron-down"></i></a>
-                <div class="dropdown-menu">
-                    <div class="dropdown-column"><h4>Lumber & Board</h4><a href="#">Dimensional Lumber</a><a href="#">Plywood Sheets</a><a href="#">OSB Board</a><a href="#">Treated Timber</a></div>
-                    <div class="dropdown-column"><h4>Concrete & Masonry</h4><a href="#">Cement & Concrete Mix</a><a href="#">Bricks & Blocks</a><a href="#">Mortar & Grout</a><a href="#">Steel Reinforcing</a></div>
-                    <div class="dropdown-column"><h4>Roofing</h4><a href="#">Corrugated Roofing</a><a href="#">Roof Tiles</a><a href="#">Insulation</a><a href="#">Waterproofing</a></div>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="paint.html">Paint <i class="fas fa-chevron-down"></i></a>
-                <div class="dropdown-menu">
-                    <div class="dropdown-column"><h4>Interior Paint</h4><a href="#">Matt Emulsion</a><a href="#">Silk & Satin</a><a href="#">Ceiling Paint</a><a href="#">Feature Wall</a></div>
-                    <div class="dropdown-column"><h4>Exterior Paint</h4><a href="#">Masonry Paint</a><a href="#">Wood Stain</a><a href="#">Anti-Rust Paint</a><a href="#">Waterproof Coatings</a></div>
-                    <div class="dropdown-column"><h4>Supplies</h4><a href="#">Rollers & Brushes</a><a href="#">Primers & Undercoats</a><a href="#">Painter's Tape</a><a href="#">Paint Trays & Kits</a></div>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="#">Electrical <i class="fas fa-chevron-down"></i></a>
-                <div class="dropdown-menu">
-                    <div class="dropdown-column"><h4>Wiring</h4><a href="#">Electrical Cable</a><a href="#">Conduit & Trunking</a><a href="#">Junction Boxes</a></div>
-                    <div class="dropdown-column"><h4>Devices</h4><a href="#">Switches & Sockets</a><a href="#">Circuit Breakers</a><a href="#">Distribution Boards</a></div>
-                </div>
-            </li>
-            <li class="nav-item"><a href="#">Hardware</a></li>
-            <li class="nav-item"><a href="#">Outdoor</a></li>
-            <li class="nav-item highlight"><a href="#"><i class="fas fa-tags"></i> Deals</a></li>
-        </ul>
-    </nav>
 </header>
 
-<!-- Mobile Nav -->
-<nav class="mobile-nav" id="mobileNav">
-    <div class="mobile-nav-header"><span>Menu</span><button class="mobile-nav-close" id="mobileNavClose"><i class="fas fa-times"></i></button></div>
-    <ul class="mobile-nav-list">
-        <li><a href="power-tools.html">Power Tools</a></li>
-        <li><a href="plumbing.html">Plumbing</a></li>
-        <li><a href="building-materials.html">Building Materials</a></li>
-        <li><a href="paint.html">Paint</a></li>
-        <li><a href="#">Electrical</a></li>
-        <li><a href="#">Hardware</a></li>
-        <li><a href="#">Outdoor</a></li>
-        <li><a href="#" class="highlight"><i class="fas fa-tags"></i> Deals</a></li>
+<!-- ===== Main Navigation ===== -->
+<nav class="main-nav">
+    <ul class="nav-list">
+        <li class="nav-item active"><a href="plumbing.html">Plumbing</a></li>
+        <li class="nav-item"><a href="building.html">Building Materials</a></li>
+        <li class="nav-item"><a href="paint.html">Paint</a></li>
+        <li class="nav-item"><a href="tools.hmtl">Power Tools</a></li>
+        <li class="nav-item"><a href="electrical.html">Electrical</a></li>
+        <li class="nav-item"><a href="hardware.html">Hardware</a></li>
+        <li class="nav-item dropdown">
+            <a href="#">More <i class="fas fa-chevron-down"></i></a>
+            <div class="dropdown-menu">
+                <div class="dropdown-column">
+                    <h4>Safety</h4>
+                    <a href="protectivegear.html">Protective Gear</a>
+                    <a href="safetysigns.html">Safety Signs</a>
+                    <a href="firstaid.html">First Aid</a>
+                </div>
+                <div class="dropdown-column">
+                    <h4>Garden</h4>
+                    <a href="irrigation.html">Irrigation</a>
+                    <a href="garden.html">Garden Tools</a>
+                    <a href="outdoor.html">Outdoor Living</a>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item highlight"><a href="deals.html">Today's Deals</a></li>
     </ul>
 </nav>
-<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
 
-<!-- ===== PROMO STRIP ===== -->
-<div class="promo-strip">
-    <div class="promo-strip-inner">
-        <div class="promo-strip-item"><i class="fas fa-bolt"></i> Flash Sale — 40% Off DeWalt Power Tools</div>
-        <div class="promo-strip-item"><i class="fas fa-tint"></i> Plumbing Week — 20% Off All Fixtures</div>
-        <div class="promo-strip-item"><i class="fas fa-paint-roller"></i> Buy 2 Paints, Get 1 Free</div>
-        <div class="promo-strip-item"><i class="fas fa-cubes"></i> New In — Rapid-Set Concrete Mix</div>
-        <div class="promo-strip-item"><i class="fas fa-truck"></i> Free Delivery Orders Over $75</div>
-        <div class="promo-strip-item"><i class="fas fa-credit-card"></i> 0% Finance on Orders $299+</div>
-        <div class="promo-strip-item"><i class="fas fa-bolt"></i> Flash Sale — 40% Off DeWalt Power Tools</div>
-        <div class="promo-strip-item"><i class="fas fa-tint"></i> Plumbing Week — 20% Off All Fixtures</div>
-        <div class="promo-strip-item"><i class="fas fa-paint-roller"></i> Buy 2 Paints, Get 1 Free</div>
-        <div class="promo-strip-item"><i class="fas fa-cubes"></i> New In — Rapid-Set Concrete Mix</div>
-        <div class="promo-strip-item"><i class="fas fa-truck"></i> Free Delivery Orders Over $75</div>
-        <div class="promo-strip-item"><i class="fas fa-credit-card"></i> 0% Finance on Orders $299+</div>
+<!-- ===== Mobile Navigation ===== -->
+<div class="mobile-nav-overlay" id="mobileOverlay"></div>
+<nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-header">
+        <span><i class="fas fa-helmet-safety" style="color:var(--gold-400);margin-right:8px;"></i> BuildSol</span>
+        <button class="mobile-nav-close" id="mobileClose"><i class="fas fa-xmark"></i></button>
+    </div>
+    <ul class="mobile-nav-list">
+        <li><a href="#" class="highlight">Today's Deals</a></li>
+        <li class="nav-item active"><a href="plumbing.html">Plumbing</a></li>
+        <li class="nav-item"><a href="building.html">Building Materials</a></li>
+        <li class="nav-item"><a href="paint.html">Paint</a></li>
+        <li class="nav-item"><a href="tools.hmtl">Power Tools</a></li>
+        <li class="nav-item"><a href="electrical.html">Electrical</a></li>
+        <li class="nav-item"><a href="hardware.html">Hardware</a></li>
+		<li class="nav-item dropdown">
+            <a href="#">More <i class="fas fa-chevron-down"></i></a>
+            <div class="dropdown-menu">
+                <div class="dropdown-column">
+                    <h4>Safety</h4>
+                    <a href="protectivegear.html">Protective Gear</a>
+                    <a href="safetysigns.html">Safety Signs</a>
+                    <a href="firstaid.html">First Aid</a>
+                </div>
+                <div class="dropdown-column">
+                    <h4>Garden</h4>
+                    <a href="irrigation.html">Irrigation</a>
+                    <a href="garden.html">Garden Tools</a>
+                    <a href="outdoor.html">Outdoor Living</a>
+                </div>
+            </div>
+        </li>
+		        </li>
+        <li class="nav-item highlight"><a href="deals.html">Today's Deals</a></li>
+    </ul>
+</nav>
+
+<!-- ===== Page Hero ===== -->
+<!-- 
+    TEMPLATE NOTE:
+    Change the icon (data-cat-icon), heading, description, breadcrumb label and stats 
+    for each of the 6 category pages:
+      - Plumbing:           fa-faucet-drip   | Navy accent | "Pipes, fittings & fixtures"
+      - Building Materials: fa-bricks        | "Cement, steel, timber & more"
+      - Paint:              fa-paint-roller  | "Interior, exterior & specialty"
+      - Power Tools:        fa-screwdriver-wrench | "Drills, saws, grinders & more"
+      - Electrical:         fa-plug-circle-bolt   | "Wiring, switches & lighting"
+      - Hardware:           fa-toolbox       | "Fasteners, hinges & fittings"
+-->
+<section class="page-hero" id="catPageHero">
+    <div class="page-hero-content">
+        <div class="page-hero-text">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="#">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Plumbing</span>
+            </nav>
+            <h1>Plumbing</h1>
+            <p>Everything you need for professional plumbing installations, repairs, and maintenance — from copper pipes to chrome fittings.</p>
+
+            <div class="hero-stats-strip">
+                <div class="hero-stat"><i class="fas fa-box"></i><strong>2,400+</strong> products</div>
+                <div class="hero-stat"><i class="fas fa-tag"></i><strong>320+</strong> on sale</div>
+                <div class="hero-stat"><i class="fas fa-truck-fast"></i><strong>Same-day</strong> dispatch</div>
+                <div class="hero-stat"><i class="fas fa-building"></i><strong>In-store</strong> & online</div>
+            </div>
+
+            <div class="page-hero-ctas">
+                <a href="#products" class="btn btn-primary"><i class="fas fa-layer-group"></i> Shop All Plumbing</a>
+                <a href="#" class="btn btn-outline"><i class="fas fa-percent"></i> View Deals</a>
+            </div>
+        </div>
+
+        <div class="page-hero-icon" aria-hidden="true">
+            <i class="fas fa-faucet-drip"></i>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Quick Category Navigation ===== -->
+<div class="cat-quick-nav" role="navigation" aria-label="Subcategory shortcuts">
+    <div class="cat-quick-nav-inner">
+        <span class="cat-nav-label">Jump to</span>
+        <a href="#" class="cat-nav-pill active"><i class="fas fa-th"></i> All</a>
+        <a href="#" class="cat-nav-pill"><i class="fas fa-pipe-section"></i> Pipes & Tubes</a>
+        <a href="#" class="cat-nav-pill"><i class="fas fa-screwdriver"></i> Fittings</a>
+        <a href="#" class="cat-nav-pill"><i class="fas fa-faucet"></i> Taps & Valves</a>
+        <a href="#" class="cat-nav-pill"><i class="fas fa-toilet"></i> Sanitary Ware</a>
+        <a href="#" class="cat-nav-pill"><i class="fas fa-fire-burner"></i> Geysers & Heating</a>
+        <a href="#" class="cat-nav-pill"><i class="fas fa-wrench"></i> Tools & Seals</a>
+        <a href="#" class="cat-nav-pill"><i class="fas fa-droplet"></i> Drainage</a>
+        <a href="#" class="cat-nav-pill"><i class="fas fa-shower"></i> Showers & Baths</a>
     </div>
 </div>
 
-<main>
-
-<!-- ===== HERO SLIDER ===== -->
-<section class="hero-section">
-    <div class="hero-slider" id="heroSlider">
-        <div class="slide active">
-            <div class="slide-background" style="background-image:url('https://images.unsplash.com/photo-1504148455328-c376907d081c?w=1600&q=80')"></div>
-            <div class="slide-content">
-                <span class="slide-tag">Summer Sale</span>
-                <h1>Power Tools<br>Up to 40% Off</h1>
-                <p>Professional-grade cordless tools from DeWalt, Milwaukee & Makita. Limited time.</p>
-                <div class="slide-buttons"><a href="power-tools.html" class="btn btn-primary">Shop Power Tools</a><a href="#" class="btn btn-outline">View All Deals</a></div>
-            </div>
-        </div>
-        <div class="slide">
-            <div class="slide-background" style="background-image:url('https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=1600&q=80')"></div>
-            <div class="slide-content">
-                <span class="slide-tag">Plumbing Week</span>
-                <h1>20% Off All<br>Plumbing Fixtures</h1>
-                <p>Faucets, showerheads, toilets and more. Quality brands at unbeatable prices.</p>
-                <div class="slide-buttons"><a href="plumbing.html" class="btn btn-primary">Shop Plumbing</a><a href="#" class="btn btn-outline">Learn More</a></div>
-            </div>
-        </div>
-        <div class="slide">
-            <div class="slide-background" style="background-image:url('https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=1600&q=80')"></div>
-            <div class="slide-content">
-                <span class="slide-tag">Paint Sale</span>
-                <h1>Buy 2 Get 1 Free<br>On All Paints</h1>
-                <p>Interior, exterior, primers and stains. Over 2,000 colour options in store.</p>
-                <div class="slide-buttons"><a href="paint.html" class="btn btn-primary">Shop Paint</a><a href="#" class="btn btn-outline">Colour Guide</a></div>
-            </div>
-        </div>
-        <div class="slide">
-            <div class="slide-background" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80')"></div>
-            <div class="slide-content">
-                <span class="slide-tag">New Arrivals</span>
-                <h1>Fresh Stock:<br>Building Materials</h1>
-                <p>Rapid-set concrete, new plywood grades, treated timber and more just landed.</p>
-                <div class="slide-buttons"><a href="building-materials.html" class="btn btn-primary">Explore Materials</a></div>
-            </div>
-        </div>
-    </div>
-    <div class="slider-controls">
-        <button class="slider-arrow prev" id="sliderPrev"><i class="fas fa-chevron-left"></i></button>
-        <div class="slider-dots" id="sliderDots">
-            <button class="dot active"></button><button class="dot"></button><button class="dot"></button><button class="dot"></button>
-        </div>
-        <button class="slider-arrow next" id="sliderNext"><i class="fas fa-chevron-right"></i></button>
-    </div>
-    <aside class="promo-sidebar">
-        <div class="promo-card"><div class="promo-icon"><i class="fas fa-percent"></i></div><div class="promo-info"><h4>Weekly Deals</h4><p>Save up to 50%</p></div><a href="#" class="promo-link"><i class="fas fa-arrow-right"></i></a></div>
-        <div class="promo-card featured"><div class="promo-icon"><i class="fas fa-bolt"></i></div><div class="promo-info"><h4>Flash Sale</h4><p>Ends in <span class="countdown" id="flashCountdown">02:45:30</span></p></div><a href="#" class="promo-link"><i class="fas fa-arrow-right"></i></a></div>
-        <div class="promo-card"><div class="promo-icon"><i class="fas fa-paint-roller"></i></div><div class="promo-info"><h4>Paint Special</h4><p>Buy 2, Get 1 Free</p></div><a href="#" class="promo-link"><i class="fas fa-arrow-right"></i></a></div>
-        <div class="promo-card"><div class="promo-icon"><i class="fas fa-credit-card"></i></div><div class="promo-info"><h4>0% Financing</h4><p>On orders $299+</p></div><a href="#" class="promo-link"><i class="fas fa-arrow-right"></i></a></div>
-    </aside>
-</section>
-
-<!-- ===== CATEGORIES ===== -->
-<section class="categories-section">
-    <div class="section-container">
-        <div class="section-header"><h2>Shop By Category</h2><a href="#" class="view-all">All Categories <i class="fas fa-arrow-right"></i></a></div>
-        <div class="categories-grid">
-            <a href="power-tools.html" class="category-card"><div class="category-image"><img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&q=80" alt="Power Tools"></div><div class="category-info"><h3>Power Tools</h3><span>250+ Products</span></div></a>
-            <a href="plumbing.html" class="category-card"><div class="category-image"><img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=400&q=80" alt="Plumbing"></div><div class="category-info"><h3>Plumbing</h3><span>180+ Products</span></div></a>
-            <a href="building-materials.html" class="category-card"><div class="category-image"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Building Materials"></div><div class="category-info"><h3>Building Materials</h3><span>320+ Products</span></div></a>
-            <a href="paint.html" class="category-card"><div class="category-image"><img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&q=80" alt="Paint"></div><div class="category-info"><h3>Paint & Finishes</h3><span>200+ Products</span></div></a>
-            <a href="#" class="category-card"><div class="category-image"><img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&q=80" alt="Electrical"></div><div class="category-info"><h3>Electrical</h3><span>150+ Products</span></div></a>
-            <a href="#" class="category-card"><div class="category-image"><img src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=400&q=80" alt="Hardware"></div><div class="category-info"><h3>Hardware & Fixings</h3><span>400+ Products</span></div></a>
-        </div>
-    </div>
-</section>
-
-<!-- ===== NEW ARRIVALS BANNER ===== -->
-<section class="new-products-banner">
-    <div class="banner-container">
-        <div class="banner-content">
-            <span class="banner-tag"><i class="fas fa-star"></i> Just Arrived</span>
-            <h2>New Products Collection</h2>
-            <p>Fresh stock just landed — innovative power tools, updated plumbing systems, and the latest paint ranges from industry-leading brands.</p>
-            <a href="#" class="btn btn-primary">Explore New Arrivals</a>
-        </div>
-        <div class="banner-products">
-            <div class="floating-product" style="--delay:0s"><img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=300&q=80" alt="Tool"></div>
-            <div class="floating-product" style="--delay:0.5s"><img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=300&q=80" alt="Plumbing"></div>
-            <div class="floating-product" style="--delay:1s"><img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=300&q=80" alt="Paint"></div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== FEATURED PRODUCTS ===== -->
-<section class="products-section">
+<!-- ===== Subcategories Grid ===== -->
+<section class="subcategory-section">
     <div class="section-container">
         <div class="section-header">
-            <h2><i class="fas fa-fire"></i> Featured Products</h2>
-            <div class="product-tabs">
-                <button class="tab-btn active">Best Sellers</button>
-                <button class="tab-btn">New Arrivals</button>
-                <button class="tab-btn">Top Deals</button>
+            <h2><i class="fas fa-grid-2"></i> Shop by Category</h2>
+            <a href="#" class="view-all">View all categories <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="subcategory-grid">
+            <a href="#" class="subcat-card">
+                <div class="subcat-card-img"><i class="fas fa-pipe-section"></i></div>
+                <div class="subcat-card-body">
+                    <h3>Pipes & Tubes</h3>
+                    <span>uPVC, copper, galvanized</span>
+                </div>
+                <div class="subcat-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+            <a href="#" class="subcat-card">
+                <div class="subcat-card-img"><i class="fas fa-screwdriver"></i></div>
+                <div class="subcat-card-body">
+                    <h3>Fittings & Connectors</h3>
+                    <span>Elbows, tees, reducers</span>
+                </div>
+                <div class="subcat-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+            <a href="#" class="subcat-card">
+                <div class="subcat-card-img"><i class="fas fa-faucet"></i></div>
+                <div class="subcat-card-body">
+                    <h3>Taps & Valves</h3>
+                    <span>Ball valves, gate valves, mixers</span>
+                </div>
+                <div class="subcat-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+            <a href="#" class="subcat-card">
+                <div class="subcat-card-img"><i class="fas fa-toilet"></i></div>
+                <div class="subcat-card-body">
+                    <h3>Sanitary Ware</h3>
+                    <span>Toilets, basins, cisterns</span>
+                </div>
+                <div class="subcat-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+            <a href="#" class="subcat-card">
+                <div class="subcat-card-img"><i class="fas fa-fire-burner"></i></div>
+                <div class="subcat-card-body">
+                    <h3>Geysers & Heating</h3>
+                    <span>Solar, heat pump, electric</span>
+                </div>
+                <div class="subcat-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+            <a href="#" class="subcat-card">
+                <div class="subcat-card-img"><i class="fas fa-shower"></i></div>
+                <div class="subcat-card-body">
+                    <h3>Showers & Baths</h3>
+                    <span>Enclosures, trays, accessories</span>
+                </div>
+                <div class="subcat-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+            <a href="#" class="subcat-card">
+                <div class="subcat-card-img"><i class="fas fa-droplet"></i></div>
+                <div class="subcat-card-body">
+                    <h3>Drainage Systems</h3>
+                    <span>Gutters, gullies, channels</span>
+                </div>
+                <div class="subcat-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+            <a href="#" class="subcat-card">
+                <div class="subcat-card-img"><i class="fas fa-wrench"></i></div>
+                <div class="subcat-card-body">
+                    <h3>Plumbing Tools</h3>
+                    <span>Pipe cutters, wrenches, sealants</span>
+                </div>
+                <div class="subcat-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Brand Strip ===== -->
+<div class="cat-brand-strip">
+    <div class="cat-brand-strip-inner">
+        <span class="cat-brand-title">Top Brands</span>
+        <div class="cat-brands-list">
+            <span class="cat-brand-item">COBRA</span>
+            <span class="cat-brand-item">MARLEY</span>
+            <span class="cat-brand-item">HENCO</span>
+            <span class="cat-brand-item">VALSIR</span>
+            <span class="cat-brand-item">GROHE</span>
+            <span class="cat-brand-item">GEBERIT</span>
+            <span class="cat-brand-item">KWIKOT</span>
+            <span class="cat-brand-item">ROCA</span>
+        </div>
+    </div>
+</div>
+
+<!-- ===== Main Content: Sidebar + Products ===== -->
+<section class="cat-content-wrap" id="products">
+    <div class="section-container">
+
+        <!-- Featured Promo Banner -->
+        <div class="cat-promo-banner">
+            <div class="cat-promo-text">
+                <span class="cat-promo-tag"><i class="fas fa-bolt"></i> Limited Time Offer</span>
+                <h2>Plumbing Week Sale</h2>
+                <p>Save big on pipes, fittings, geysers and more. Trade & retail pricing available in-store and online.</p>
+                <div class="cat-promo-actions">
+                    <a href="#" class="btn btn-primary"><i class="fas fa-tag"></i> Shop Deals</a>
+                    <a href="#" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
+            <div class="cat-promo-visual">
+                <div class="cat-promo-stat">
+                    <span class="cat-promo-stat-number">30%</span>
+                    <div class="cat-promo-stat-label">Max savings</div>
+                </div>
+                <div class="cat-promo-stat">
+                    <span class="cat-promo-stat-number">320</span>
+                    <div class="cat-promo-stat-label">Items on sale</div>
+                </div>
+                <div class="cat-promo-stat">
+                    <span class="cat-promo-stat-number">5d</span>
+                    <div class="cat-promo-stat-label">Left in deal</div>
+                </div>
             </div>
         </div>
-        <div class="products-grid">
-            <div class="product-card"><div class="product-badges"><span class="badge sale">-25%</span><span class="badge bestseller">Best Seller</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&q=80" alt="DeWalt Drill"></div><div class="product-info"><span class="product-brand">DeWalt</span><h3 class="product-name">20V MAX Cordless Drill/Driver Kit</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><span class="rating-count">(248)</span></div><div class="product-price"><span class="current-price">$149.99</span><span class="original-price">$199.99</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
-            <div class="product-card"><div class="product-badges"><span class="badge new">New</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=400&q=80" alt="Milwaukee Impact Driver"></div><div class="product-info"><span class="product-brand">Milwaukee</span><h3 class="product-name">M18 FUEL Impact Driver (Tool Only)</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-count">(156)</span></div><div class="product-price"><span class="current-price">$229.00</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
-            <div class="product-card"><div class="product-badges"><span class="badge promo">20% Off</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=400&q=80" alt="Grohe Faucet"></div><div class="product-info"><span class="product-brand">Grohe</span><h3 class="product-name">Concetto Single-Lever Basin Mixer</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div><span class="rating-count">(94)</span></div><div class="product-price"><span class="current-price">$89.99</span><span class="original-price">$112.00</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
-            <div class="product-card"><div class="product-badges"><span class="badge new">New Range</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&q=80" alt="Dulux Paint"></div><div class="product-info"><span class="product-brand">Dulux</span><h3 class="product-name">Easycare Washable Matt Emulsion — 5L</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-count">(312)</span></div><div class="product-price"><span class="current-price">$34.99</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
+
+        <div class="cat-layout">
+            <!-- ===== Sidebar ===== -->
+            <aside class="cat-sidebar" aria-label="Filter products">
+
+                <!-- Apply Filters CTA -->
+                <a href="#" class="btn btn-primary" style="width:100%;margin-bottom:var(--spacing-md);justify-content:center;">
+                    <i class="fas fa-sliders"></i> Apply Filters
+                </a>
+
+                <!-- Filters Widget -->
+                <div class="sidebar-widget">
+                    <div class="sidebar-widget-header">
+                        <i class="fas fa-filter"></i>
+                        <h3>Filter Products</h3>
+                    </div>
+                    <div class="sidebar-widget-body">
+
+                        <!-- In-stock toggle -->
+                        <div class="toggle-wrap">
+                            <span class="toggle-label">In Stock Only</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="toggle-wrap">
+                            <span class="toggle-label">On Sale</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <hr style="border:none;border-top:1px solid var(--gray-100);margin:var(--spacing-md) 0;">
+
+                        <!-- Brand filter -->
+                        <div class="filter-group">
+                            <div class="filter-group-title">Brand</div>
+                            <div class="filter-check-list">
+                                <label class="filter-check-item">
+                                    <input type="checkbox" checked>
+                                    <label>Cobra</label>
+                                    <span class="filter-check-count">148</span>
+                                </label>
+                                <label class="filter-check-item">
+                                    <input type="checkbox">
+                                    <label>Marley</label>
+                                    <span class="filter-check-count">93</span>
+                                </label>
+                                <label class="filter-check-item">
+                                    <input type="checkbox">
+                                    <label>Grohe</label>
+                                    <span class="filter-check-count">74</span>
+                                </label>
+                                <label class="filter-check-item">
+                                    <input type="checkbox">
+                                    <label>Kwikot</label>
+                                    <span class="filter-check-count">56</span>
+                                </label>
+                                <label class="filter-check-item">
+                                    <input type="checkbox">
+                                    <label>Geberit</label>
+                                    <span class="filter-check-count">41</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Material filter -->
+                        <div class="filter-group">
+                            <div class="filter-group-title">Material</div>
+                            <div class="filter-check-list">
+                                <label class="filter-check-item">
+                                    <input type="checkbox" checked>
+                                    <label>uPVC</label>
+                                    <span class="filter-check-count">312</span>
+                                </label>
+                                <label class="filter-check-item">
+                                    <input type="checkbox">
+                                    <label>Copper</label>
+                                    <span class="filter-check-count">220</span>
+                                </label>
+                                <label class="filter-check-item">
+                                    <input type="checkbox">
+                                    <label>Brass</label>
+                                    <span class="filter-check-count">187</span>
+                                </label>
+                                <label class="filter-check-item">
+                                    <input type="checkbox">
+                                    <label>Stainless Steel</label>
+                                    <span class="filter-check-count">95</span>
+                                </label>
+                                <label class="filter-check-item">
+                                    <input type="checkbox">
+                                    <label>Galvanized</label>
+                                    <span class="filter-check-count">68</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Price range -->
+                        <div class="filter-group">
+                            <div class="filter-group-title">Price Range</div>
+                            <div class="price-range-wrap">
+                                <div class="price-range-labels">
+                                    <span>R0</span>
+                                    <span>R5,000</span>
+                                </div>
+                                <input type="range" class="price-slider" min="0" max="5000" value="2500">
+                            </div>
+                        </div>
+
+                        <button class="sidebar-clear-btn"><i class="fas fa-rotate-left"></i> Clear All Filters</button>
+                    </div>
+                </div>
+
+                <!-- Help Widget -->
+                <div class="sidebar-widget">
+                    <div class="sidebar-widget-header">
+                        <i class="fas fa-circle-question"></i>
+                        <h3>Need Help?</h3>
+                    </div>
+                    <div class="sidebar-widget-body" style="text-align:center;">
+                        <i class="fas fa-headset" style="font-size:2rem;color:var(--navy-400);margin-bottom:var(--spacing-md);display:block;"></i>
+                        <p style="font-size:0.875rem;color:var(--gray-600);margin-bottom:var(--spacing-md);">Our plumbing experts are ready to assist you.</p>
+                        <a href="#" class="btn btn-secondary" style="width:100%;justify-content:center;font-size:0.875rem;padding:0.6rem 1rem;">
+                            <i class="fas fa-phone"></i> Talk to an Expert
+                        </a>
+                    </div>
+                </div>
+
+            </aside>
+
+            <!-- ===== Products Column ===== -->
+            <div>
+                <!-- Filter Bar -->
+                <div class="filter-bar" style="position:relative;top:auto;background:transparent;border:none;padding:0;box-shadow:none;margin-bottom:var(--spacing-lg);">
+                    <div class="filter-bar-inner" style="padding:0;flex-wrap:wrap;">
+                        <span class="filter-label">Filter:</span>
+                        <div class="filter-chips">
+                            <button class="chip active">All</button>
+                            <button class="chip">Pipes & Tubes</button>
+                            <button class="chip">Fittings</button>
+                            <button class="chip">Taps & Valves</button>
+                            <button class="chip">Drainage</button>
+                            <button class="chip">Geysers</button>
+                        </div>
+                        <select class="sort-select" aria-label="Sort products">
+                            <option>Sort: Featured</option>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                            <option>Best Selling</option>
+                            <option>New Arrivals</option>
+                            <option>Top Rated</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Active Filters -->
+                <div class="active-filters">
+                    <span class="active-filters-label">Active:</span>
+                    <span class="active-filter-tag">uPVC <button aria-label="Remove filter">×</button></span>
+                    <span class="active-filter-tag">Cobra <button aria-label="Remove filter">×</button></span>
+                    <span class="active-filter-tag">In Stock <button aria-label="Remove filter">×</button></span>
+                    <button class="clear-all-filters">Clear all</button>
+                </div>
+
+                <!-- Results Header -->
+                <div class="cat-results-header">
+                    <div class="cat-results-count">
+                        Showing <strong>24</strong> of <strong>2,412</strong> products
+                    </div>
+                    <div class="cat-results-controls">
+                        <div class="view-toggle" role="group" aria-label="View mode">
+                            <button class="view-toggle-btn active" aria-label="Grid view" title="Grid view"><i class="fas fa-grid-2"></i></button>
+                            <button class="view-toggle-btn" aria-label="List view" title="List view"><i class="fas fa-list"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="products-grid" id="productsGrid">
+
+                    <!-- Product Card 1 -->
+                    <article class="product-card">
+                        <div class="product-badges">
+                            <span class="badge sale">−18%</span>
+                        </div>
+                        <button class="wishlist-btn" aria-label="Add to wishlist"><i class="far fa-heart"></i></button>
+                        <div class="product-image">
+                            <div style="width:100%;height:100%;background:linear-gradient(135deg,var(--navy-100),var(--gray-200));display:flex;align-items:center;justify-content:center;">
+                                <i class="fas fa-pipe-section" style="font-size:3rem;color:var(--navy-400);"></i>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-brand">Marley</span>
+                            <h3 class="product-name">uPVC Pressure Pipe Class 9 — 20mm × 6m</h3>
+                            <div class="product-rating">
+                                <div class="stars">★★★★★</div>
+                                <span class="rating-count">(124)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="current-price">R89.99</span>
+                                <span class="original-price">R109.99</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                                <button class="quick-view" title="Quick View"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Product Card 2 -->
+                    <article class="product-card">
+                        <div class="product-badges">
+                            <span class="badge bestseller">Bestseller</span>
+                        </div>
+                        <button class="wishlist-btn" aria-label="Add to wishlist"><i class="far fa-heart"></i></button>
+                        <div class="product-image">
+                            <div style="width:100%;height:100%;background:linear-gradient(135deg,var(--gold-100),var(--gold-200));display:flex;align-items:center;justify-content:center;">
+                                <i class="fas fa-faucet" style="font-size:3rem;color:var(--gold-600);"></i>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-brand">Cobra</span>
+                            <h3 class="product-name">Single Lever Basin Mixer Tap — Chrome</h3>
+                            <div class="product-rating">
+                                <div class="stars">★★★★☆</div>
+                                <span class="rating-count">(89)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="current-price">R549.00</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                                <button class="quick-view" title="Quick View"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Product Card 3 -->
+                    <article class="product-card">
+                        <div class="product-badges">
+                            <span class="badge new">New</span>
+                        </div>
+                        <button class="wishlist-btn active" aria-label="Remove from wishlist"><i class="fas fa-heart"></i></button>
+                        <div class="product-image">
+                            <div style="width:100%;height:100%;background:linear-gradient(135deg,var(--navy-50),var(--navy-100));display:flex;align-items:center;justify-content:center;">
+                                <i class="fas fa-droplet" style="font-size:3rem;color:var(--navy-500);"></i>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-brand">Henco</span>
+                            <h3 class="product-name">Multilayer PEX Pipe 16mm — 50m Roll</h3>
+                            <div class="product-rating">
+                                <div class="stars">★★★★★</div>
+                                <span class="rating-count">(37)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="current-price">R1,249.00</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                                <button class="quick-view" title="Quick View"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Product Card 4 -->
+                    <article class="product-card">
+                        <div class="product-badges">
+                            <span class="badge sale">−25%</span>
+                            <span class="badge promo">Bundle</span>
+                        </div>
+                        <button class="wishlist-btn" aria-label="Add to wishlist"><i class="far fa-heart"></i></button>
+                        <div class="product-image">
+                            <div style="width:100%;height:100%;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);display:flex;align-items:center;justify-content:center;">
+                                <i class="fas fa-fire-burner" style="font-size:3rem;color:#2e7d32;"></i>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-brand">Kwikot</span>
+                            <h3 class="product-name">150L Solar Geyser System — Complete Kit</h3>
+                            <div class="product-rating">
+                                <div class="stars">★★★★★</div>
+                                <span class="rating-count">(211)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="current-price">R8,999.00</span>
+                                <span class="original-price">R11,999.00</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                                <button class="quick-view" title="Quick View"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Product Card 5 -->
+                    <article class="product-card">
+                        <button class="wishlist-btn" aria-label="Add to wishlist"><i class="far fa-heart"></i></button>
+                        <div class="product-image">
+                            <div style="width:100%;height:100%;background:linear-gradient(135deg,#fce4ec,#f8bbd0);display:flex;align-items:center;justify-content:center;">
+                                <i class="fas fa-toilet" style="font-size:3rem;color:#c62828;"></i>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-brand">Roca</span>
+                            <h3 class="product-name">Close-Coupled WC Suite — White</h3>
+                            <div class="product-rating">
+                                <div class="stars">★★★★☆</div>
+                                <span class="rating-count">(66)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="current-price">R1,799.00</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                                <button class="quick-view" title="Quick View"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Product Card 6 -->
+                    <article class="product-card">
+                        <div class="product-badges">
+                            <span class="badge sale">−12%</span>
+                        </div>
+                        <button class="wishlist-btn" aria-label="Add to wishlist"><i class="far fa-heart"></i></button>
+                        <div class="product-image">
+                            <div style="width:100%;height:100%;background:linear-gradient(135deg,var(--gray-100),var(--gray-200));display:flex;align-items:center;justify-content:center;">
+                                <i class="fas fa-wrench" style="font-size:3rem;color:var(--gray-500);"></i>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-brand">Cobra</span>
+                            <h3 class="product-name">15mm Compression Straight Coupling — Brass</h3>
+                            <div class="product-rating">
+                                <div class="stars">★★★★★</div>
+                                <span class="rating-count">(302)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="current-price">R18.50</span>
+                                <span class="original-price">R21.00</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                                <button class="quick-view" title="Quick View"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Product Card 7 -->
+                    <article class="product-card">
+                        <div class="product-badges">
+                            <span class="badge bestseller">Top Rated</span>
+                        </div>
+                        <button class="wishlist-btn" aria-label="Add to wishlist"><i class="far fa-heart"></i></button>
+                        <div class="product-image">
+                            <div style="width:100%;height:100%;background:linear-gradient(135deg,#e3f2fd,#bbdefb);display:flex;align-items:center;justify-content:center;">
+                                <i class="fas fa-shower" style="font-size:3rem;color:#1565c0;"></i>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-brand">Grohe</span>
+                            <h3 class="product-name">Grohtherm Thermostatic Shower Mixer</h3>
+                            <div class="product-rating">
+                                <div class="stars">★★★★★</div>
+                                <span class="rating-count">(153)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="current-price">R3,299.00</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                                <button class="quick-view" title="Quick View"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Product Card 8 -->
+                    <article class="product-card">
+                        <button class="wishlist-btn" aria-label="Add to wishlist"><i class="far fa-heart"></i></button>
+                        <div class="product-image">
+                            <div style="width:100%;height:100%;background:linear-gradient(135deg,var(--navy-50),var(--navy-100));display:flex;align-items:center;justify-content:center;">
+                                <i class="fas fa-circle-half-stroke" style="font-size:3rem;color:var(--navy-400);"></i>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-brand">Geberit</span>
+                            <h3 class="product-name">Concealed Cistern Frame — Dual Flush</h3>
+                            <div class="product-rating">
+                                <div class="stars">★★★★☆</div>
+                                <span class="rating-count">(44)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="current-price">R2,450.00</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                                <button class="quick-view" title="Quick View"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+                <!-- End Products Grid -->
+
+                <!-- Pagination -->
+                <nav class="cat-pagination" aria-label="Product pages">
+                    <button class="page-btn arrow" disabled aria-label="Previous page"><i class="fas fa-chevron-left"></i></button>
+                    <button class="page-btn active" aria-current="page">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <span class="page-ellipsis">…</span>
+                    <button class="page-btn">101</button>
+                    <button class="page-btn arrow" aria-label="Next page"><i class="fas fa-chevron-right"></i></button>
+                </nav>
+            </div>
+            <!-- End Products Column -->
+
         </div>
-        <div class="view-more-container"><a href="#" class="btn btn-secondary">View All Products <i class="fas fa-arrow-right"></i></a></div>
     </div>
 </section>
 
-<!-- ===== SPECIAL OFFERS ===== -->
-<section class="special-offers">
-    <div class="section-container">
-        <div class="section-header"><h2><i class="fas fa-tags"></i> Special Offers</h2></div>
-        <div class="offers-grid">
-            <div class="offer-card large"><div class="offer-background" style="background-image:url('https://images.unsplash.com/photo-1504148455328-c376907d081c?w=800&q=80')"></div><div class="offer-content"><span class="offer-tag">Limited Time</span><h3>Pro Tool Collection</h3><p>Save up to 40% on professional-grade power tools from top brands</p><a href="power-tools.html" class="btn btn-primary">Shop Collection</a></div></div>
-            <div class="offer-card"><div class="offer-background" style="background-image:url('https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&q=80')"></div><div class="offer-content"><span class="offer-tag">Paint Sale</span><h3>Buy 2 Get 1 Free</h3><p>On all interior paints this month</p><a href="paint.html" class="btn btn-outline">Shop Paint</a></div></div>
-            <div class="offer-card"><div class="offer-background" style="background-image:url('https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&q=80')"></div><div class="offer-content"><span class="offer-tag">Plumbing Week</span><h3>20% Off Fixtures</h3><p>Faucets, showers & more</p><a href="plumbing.html" class="btn btn-outline">Shop Now</a></div></div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== POWER TOOLS SECTION ===== -->
-<section class="dept-section">
-    <div class="section-container">
-        <div class="section-header"><div class="dept-header-left"><div class="dept-header-icon"><i class="fas fa-bolt"></i></div><h2>Power Tools</h2></div><a href="power-tools.html" class="view-all">All Power Tools <i class="fas fa-arrow-right"></i></a></div>
-        <div class="products-grid">
-            <div class="product-card"><div class="product-badges"><span class="badge sale">-40%</span><span class="badge bestseller">Best Seller</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1597484661973-ee6cd0b6482c?w=400&q=80" alt="Makita Circular Saw"></div><div class="product-info"><span class="product-brand">Makita</span><h3 class="product-name">7-1/4" Circular Saw with LED Guide</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-count">(312)</span></div><div class="product-price"><span class="current-price">$107.00</span><span class="original-price">$179.00</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
-            <div class="product-card"><div class="product-badges"><span class="badge new">New</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&q=80" alt="Bosch Jigsaw"></div><div class="product-info"><span class="product-brand">Bosch</span><h3 class="product-name">Professional Jigsaw PST 900 PEL</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div><span class="rating-count">(78)</span></div><div class="product-price"><span class="current-price">$129.00</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
-            <div class="product-card"><div class="product-badges"><span class="badge sale">-30%</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=400&q=80" alt="Ryobi Sander"></div><div class="product-info"><span class="product-brand">Ryobi</span><h3 class="product-name">ONE+ 18V Orbital Sander Kit</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><span class="rating-count">(141)</span></div><div class="product-price"><span class="current-price">$69.99</span><span class="original-price">$99.99</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
-            <div class="product-card"><div class="product-badges"><span class="badge bundle">Bundle Deal</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="DeWalt Combo Kit"></div><div class="product-info"><span class="product-brand">DeWalt</span><h3 class="product-name">20V MAX 5-Tool Combo Kit</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-count">(205)</span></div><div class="product-price"><span class="current-price">$399.00</span><span class="original-price">$499.00</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
-        </div>
-        <div class="view-more-container"><a href="power-tools.html" class="btn btn-secondary">View All Power Tools <i class="fas fa-arrow-right"></i></a></div>
-    </div>
-</section>
-
-<!-- ===== PLUMBING SECTION ===== -->
-<section class="dept-section">
-    <div class="section-container">
-        <div class="section-header"><div class="dept-header-left"><div class="dept-header-icon"><i class="fas fa-tint"></i></div><h2>Plumbing</h2></div><a href="plumbing.html" class="view-all">All Plumbing <i class="fas fa-arrow-right"></i></a></div>
-        <div class="products-grid">
-            <div class="product-card"><div class="product-badges"><span class="badge promo">20% Off</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=400&q=80" alt="Shower"></div><div class="product-info"><span class="product-brand">Hansgrohe</span><h3 class="product-name">Raindance Select S Overhead Shower 240</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-count">(67)</span></div><div class="product-price"><span class="current-price">$159.00</span><span class="original-price">$199.00</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
-            <div class="product-card"><div class="product-badges"><span class="badge new">New</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=400&q=80" alt="Pipes"></div><div class="product-info"><span class="product-brand">Wavin</span><h3 class="product-name">CPVC Hot & Cold Pipe Bundle — 3m</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div><span class="rating-count">(29)</span></div><div class="product-price"><span class="current-price">$24.50</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
-            <div class="product-card"><div class="product-badges"><span class="badge sale">-15%</span><span class="badge bestseller">Best Seller</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=400&q=80" alt="Toilet"></div><div class="product-info"><span class="product-brand">Armitage Shanks</span><h3 class="product-name">Close-Coupled Toilet Suite — White</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><span class="rating-count">(183)</span></div><div class="product-price"><span class="current-price">$339.00</span><span class="original-price">$399.00</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
-            <div class="product-card"><div class="product-badges"><span class="badge new">New</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=400&q=80" alt="Water Heater"></div><div class="product-info"><span class="product-brand">Rheem</span><h3 class="product-name">16L Instant Gas Water Heater</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-count">(52)</span></div><div class="product-price"><span class="current-price">$449.00</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
-        </div>
-        <div class="view-more-container"><a href="plumbing.html" class="btn btn-secondary">View All Plumbing <i class="fas fa-arrow-right"></i></a></div>
-    </div>
-</section>
-
-<!-- ===== BUILDING MATERIALS SECTION ===== -->
-<section class="dept-section">
-    <div class="section-container">
-        <div class="section-header"><div class="dept-header-left"><div class="dept-header-icon"><i class="fas fa-cubes"></i></div><h2>Building Materials</h2></div><a href="building-materials.html" class="view-all">All Materials <i class="fas fa-arrow-right"></i></a></div>
-        <div class="products-grid">
-            <div class="product-card"><div class="product-badges"><span class="badge new">New</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Concrete"></div><div class="product-info"><span class="product-brand">Quikrete</span><h3 class="product-name">Rapid Set Concrete Mix — 40kg</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-count">(88)</span></div><div class="product-price"><span class="current-price">$19.99</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
-            <div class="product-card"><div class="product-badges"><span class="badge sale">-20%</span><span class="badge bestseller">Best Seller</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Plywood"></div><div class="product-info"><span class="product-brand">GP Wood</span><h3 class="product-name">18mm Structural Plywood Sheet 2400×1200</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div><span class="rating-count">(147)</span></div><div class="product-price"><span class="current-price">$55.99</span><span class="original-price">$69.99</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
-            <div class="product-card"><div class="product-badges"><span class="badge bundle">Bundle Deal</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Bricks"></div><div class="product-info"><span class="product-brand">Ibstock</span><h3 class="product-name">Engineering Bricks Class B — Per 500</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><span class="rating-count">(63)</span></div><div class="product-price"><span class="current-price">$249.00</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
-            <div class="product-card"><div class="product-badges"><span class="badge new">New</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Roof Tiles"></div><div class="product-info"><span class="product-brand">Marley</span><h3 class="product-name">Concrete Interlocking Roof Tile — Per m²</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-count">(41)</span></div><div class="product-price"><span class="current-price">$14.50</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
-        </div>
-        <div class="view-more-container"><a href="building-materials.html" class="btn btn-secondary">View All Building Materials <i class="fas fa-arrow-right"></i></a></div>
-    </div>
-</section>
-
-<!-- ===== PAINT SECTION ===== -->
-<section class="dept-section">
-    <div class="section-container">
-        <div class="section-header"><div class="dept-header-left"><div class="dept-header-icon"><i class="fas fa-paint-roller"></i></div><h2>Paint & Finishes</h2></div><a href="paint.html" class="view-all">All Paint <i class="fas fa-arrow-right"></i></a></div>
-        <div class="products-grid">
-            <div class="product-card"><div class="product-badges"><span class="badge promo">Buy 2 Get 1</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&q=80" alt="Dulux Matt"></div><div class="product-info"><span class="product-brand">Dulux</span><h3 class="product-name">Easycare Washable Matt — 5L (Any Colour)</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-count">(422)</span></div><div class="product-price"><span class="current-price">$34.99</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
-            <div class="product-card"><div class="product-badges"><span class="badge new">New Colour Range</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&q=80" alt="Sandtex"></div><div class="product-info"><span class="product-brand">Sandtex</span><h3 class="product-name">Ultra Smooth Masonry Paint — 10L</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><span class="rating-count">(198)</span></div><div class="product-price"><span class="current-price">$52.00</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
-            <div class="product-card"><div class="product-badges"><span class="badge sale">-25%</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&q=80" alt="Anti-Rust"></div><div class="product-info"><span class="product-brand">Hammerite</span><h3 class="product-name">Direct to Rust Metal Paint — 750ml</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div><span class="rating-count">(76)</span></div><div class="product-price"><span class="current-price">$14.99</span><span class="original-price">$19.99</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
-            <div class="product-card"><div class="product-badges"><span class="badge bestseller">Best Seller</span></div><button class="wishlist-btn"><i class="far fa-heart"></i></button><div class="product-image"><img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&q=80" alt="Roller Kit"></div><div class="product-info"><span class="product-brand">Harris</span><h3 class="product-name">Ultimate Walls & Ceilings Roller Kit</h3><div class="product-rating"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-count">(289)</span></div><div class="product-price"><span class="current-price">$18.50</span></div><div class="product-actions"><button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button><button class="quick-view"><i class="fas fa-eye"></i></button></div></div></div>
-        </div>
-        <div class="view-more-container"><a href="paint.html" class="btn btn-secondary">View All Paint & Finishes <i class="fas fa-arrow-right"></i></a></div>
-    </div>
-</section>
-
-<!-- ===== STORE INFO ===== -->
+<!-- ===== Store Info Banner ===== -->
 <section class="store-info-banner">
     <div class="banner-container">
         <div class="store-info-grid">
-            <div class="store-info-card"><div class="info-icon"><i class="fas fa-store"></i></div><h3>Visit Our Store</h3><p>123 Builder's Lane<br>Craftsville, ST 12345</p><a href="#" class="info-link">Get Directions <i class="fas fa-arrow-right"></i></a></div>
-            <div class="store-info-card"><div class="info-icon"><i class="fas fa-clock"></i></div><h3>Store Hours</h3><p>Mon–Fri: 7AM – 9PM<br>Sat–Sun: 8AM – 7PM</p><a href="#" class="info-link">All Locations <i class="fas fa-arrow-right"></i></a></div>
-            <div class="store-info-card"><div class="info-icon"><i class="fas fa-headset"></i></div><h3>Need Help?</h3><p>Our experts are ready<br>to assist you</p><a href="#" class="info-link">Contact Us <i class="fas fa-arrow-right"></i></a></div>
-            <div class="store-info-card"><div class="info-icon"><i class="fas fa-tools"></i></div><h3>Pro Services</h3><p>Tool rental, cutting,<br>delivery & installation</p><a href="#" class="info-link">Learn More <i class="fas fa-arrow-right"></i></a></div>
+            <div class="store-info-card">
+                <div class="info-icon"><i class="fas fa-truck-fast"></i></div>
+                <h3>Fast Delivery</h3>
+                <p>Same-day dispatch on orders placed before 2pm. Free delivery over R1,500.</p>
+                <a href="#" class="info-link">Delivery info <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="store-info-card">
+                <div class="info-icon"><i class="fas fa-rotate-left"></i></div>
+                <h3>Easy Returns</h3>
+                <p>30-day hassle-free returns on all stock items. In-store or courier collection.</p>
+                <a href="#" class="info-link">Return policy <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="store-info-card">
+                <div class="info-icon"><i class="fas fa-headset"></i></div>
+                <h3>Expert Advice</h3>
+                <p>Our plumbing specialists are available in-store and online, Mon–Sat.</p>
+                <a href="#" class="info-link">Contact us <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="store-info-card">
+                <div class="info-icon"><i class="fas fa-shield-check"></i></div>
+                <h3>Quality Guarantee</h3>
+                <p>Only SABS-approved and manufacturer-warranted products on our shelves.</p>
+                <a href="#" class="info-link">Our promise <i class="fas fa-arrow-right"></i></a>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- ===== BRANDS ===== -->
-<section class="brands-section">
-    <div class="section-container">
-        <h2>Shop Top Brands</h2>
-        <div class="brands-slider">
-            <div class="brand-logo"><img src="https://via.placeholder.com/120x40?text=DeWalt" alt="DeWalt"></div>
-            <div class="brand-logo"><img src="https://via.placeholder.com/120x40?text=Milwaukee" alt="Milwaukee"></div>
-            <div class="brand-logo"><img src="https://via.placeholder.com/120x40?text=Makita" alt="Makita"></div>
-            <div class="brand-logo"><img src="https://via.placeholder.com/120x40?text=Bosch" alt="Bosch"></div>
-            <div class="brand-logo"><img src="https://via.placeholder.com/120x40?text=Ryobi" alt="Ryobi"></div>
-            <div class="brand-logo"><img src="https://via.placeholder.com/120x40?text=Dulux" alt="Dulux"></div>
-            <div class="brand-logo"><img src="https://via.placeholder.com/120x40?text=Grohe" alt="Grohe"></div>
-            <div class="brand-logo"><img src="https://via.placeholder.com/120x40?text=Stanley" alt="Stanley"></div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== NEWSLETTER ===== -->
+<!-- ===== Newsletter ===== -->
 <section class="newsletter-section">
     <div class="section-container">
         <div class="newsletter-content">
-            <div class="newsletter-text"><h2>Join Our Newsletter</h2><p>Get exclusive deals, DIY tips, and new product alerts delivered to your inbox.</p></div>
-            <form class="newsletter-form" onsubmit="return false;"><input type="email" placeholder="Enter your email address" required><button type="submit" class="btn btn-primary">Subscribe</button></form>
+            <div class="newsletter-text">
+                <h2>Get Trade Deals First</h2>
+                <p>Subscribe for exclusive pricing, new arrivals, and plumbing tips from our experts.</p>
+            </div>
+            <div class="newsletter-form">
+                <input type="email" placeholder="Enter your email address">
+                <button class="btn btn-primary">Subscribe</button>
+            </div>
         </div>
     </div>
 </section>
 
-</main>
-
-<!-- ===== FOOTER ===== -->
+<!-- ===== Footer ===== -->
 <footer class="main-footer">
     <div class="footer-container">
         <div class="footer-grid">
-            <div class="footer-column"><div class="footer-logo"><i class="fas fa-hammer"></i><span>Build<strong>Sol</strong></span></div><p class="footer-description">Your trusted partner for quality tools, plumbing, paint, and building materials since 1985.</p><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-pinterest"></i></a></div></div>
-            <div class="footer-column"><h4>Shop</h4><ul><li><a href="#">All Products</a></li><li><a href="#">New Arrivals</a></li><li><a href="#">Best Sellers</a></li><li><a href="#">Deals & Clearance</a></li><li><a href="#">Gift Cards</a></li></ul></div>
-            <div class="footer-column"><h4>Services</h4><ul><li><a href="#">Tool Rental</a></li><li><a href="#">Installation Services</a></li><li><a href="#">Pro Services</a></li><li><a href="#">DIY Workshops</a></li><li><a href="#">Project Calculator</a></li></ul></div>
-            <div class="footer-column"><h4>Support</h4><ul><li><a href="#">Contact Us</a></li><li><a href="#">FAQs</a></li><li><a href="#">Shipping Info</a></li><li><a href="#">Returns & Exchanges</a></li><li><a href="#">Track Order</a></li></ul></div>
-            <div class="footer-column"><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Store Locations</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li><li><a href="#">Sustainability</a></li></ul></div>
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <i class="fas fa-helmet-safety"></i>
+                    Build<strong>Sol</strong>
+                </div>
+                <p class="footer-description">South Africa's trusted hardware and building supplies retailer since 1998. Serving trade professionals and homeowners across Gauteng and beyond.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Departments</h4>
+                <ul>
+                    <li><a href="#">Plumbing</a></li>
+                    <li><a href="#">Building Materials</a></li>
+                    <li><a href="#">Paint & Coatings</a></li>
+                    <li><a href="#">Power Tools</a></li>
+                    <li><a href="#">Electrical</a></li>
+                    <li><a href="#">Hardware</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Customer Service</h4>
+                <ul>
+                    <li><a href="#">Track My Order</a></li>
+                    <li><a href="#">Returns & Refunds</a></li>
+                    <li><a href="#">Delivery Info</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>For Trade</h4>
+                <ul>
+                    <li><a href="#">Trade Accounts</a></li>
+                    <li><a href="#">Bulk Pricing</a></li>
+                    <li><a href="#">Project Quotes</a></li>
+                    <li><a href="#">Credit Application</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Store Locator</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                </ul>
+            </div>
         </div>
         <div class="footer-bottom">
-            <div class="footer-legal"><p>&copy; 2025 BuildSol Hardware. All rights reserved.</p><div class="legal-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Accessibility</a></div></div>
-            <div class="payment-methods"><img src="https://via.placeholder.com/50x28?text=Visa" alt="Visa"><img src="https://via.placeholder.com/50x28?text=MC" alt="Mastercard"><img src="https://via.placeholder.com/50x28?text=Amex" alt="Amex"><img src="https://via.placeholder.com/50x28?text=PayPal" alt="PayPal"><img src="https://via.placeholder.com/50x28?text=Apple" alt="Apple Pay"></div>
+            <div class="footer-legal">
+                <p>© 2026 BuildSol Hardware (Pty) Ltd. All rights reserved.</p>
+                <div class="legal-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                    <a href="#">Cookie Settings</a>
+                </div>
+            </div>
+            <div class="payment-methods" aria-label="Accepted payment methods">
+                <span style="font-family:var(--font-heading);font-size:0.75rem;color:var(--gray-600);margin-right:var(--spacing-sm);">We accept:</span>
+                <span style="background:var(--gray-700);color:var(--white);font-family:var(--font-heading);font-size:0.7rem;font-weight:700;padding:4px 10px;border-radius:4px;">VISA</span>
+                <span style="background:var(--gold-600);color:var(--white);font-family:var(--font-heading);font-size:0.7rem;font-weight:700;padding:4px 10px;border-radius:4px;">MC</span>
+                <span style="background:#009b77;color:var(--white);font-family:var(--font-heading);font-size:0.7rem;font-weight:700;padding:4px 10px;border-radius:4px;">EFT</span>
+                <span style="background:var(--navy-600);color:var(--white);font-family:var(--font-heading);font-size:0.7rem;font-weight:700;padding:4px 10px;border-radius:4px;">PAYFLEX</span>
+            </div>
         </div>
     </div>
 </footer>
 
+<script>
+    // ===== Mobile Navigation =====
+    const toggle = document.getElementById('mobileToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    const overlay = document.getElementById('mobileOverlay');
+    const closeBtn = document.getElementById('mobileClose');
 
+    function openNav() { mobileNav.classList.add('active'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeNav() { mobileNav.classList.remove('active'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
 
-<!-- ACCOUNT POPUP -->
+    toggle.addEventListener('click', openNav);
+    closeBtn.addEventListener('click', closeNav);
+    overlay.addEventListener('click', closeNav);
 
-<div class="account-modal" id="accountModal">
+    // ===== Filter Chips =====
+    document.querySelectorAll('.chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+            document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+        });
+    });
 
-    <div class="account-popup">
+    // ===== Quick Nav Pills =====
+    document.querySelectorAll('.cat-nav-pill').forEach(pill => {
+        pill.addEventListener('click', e => {
+            e.preventDefault();
+            document.querySelectorAll('.cat-nav-pill').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+        });
+    });
 
-        <span class="close-account" id="closeAccount">
-            &times;
-        </span>
+    // ===== Add to Cart =====
+    document.querySelectorAll('.add-to-cart').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const original = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-check"></i> Added!';
+            this.classList.add('added');
+            setTimeout(() => { this.innerHTML = original; this.classList.remove('added'); }, 1800);
+        });
+    });
 
-        <div class="account-header">
-            <h2>My Account</h2>
-            <p>Login or create an account</p>
-        </div>
+    // ===== Wishlist Toggle =====
+    document.querySelectorAll('.wishlist-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            this.classList.toggle('active');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('far');
+            icon.classList.toggle('fas');
+        });
+    });
 
-        <div class="account-tabs">
+    // ===== View Toggle =====
+    document.querySelectorAll('.view-toggle-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            document.querySelectorAll('.view-toggle-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
 
-            <button class="tab-btn active" data-tab="loginForm">
-                Login
-            </button>
+    // ===== Active Filter Tag removal =====
+    document.querySelectorAll('.active-filter-tag button').forEach(btn => {
+        btn.addEventListener('click', function () {
+            this.closest('.active-filter-tag').remove();
+        });
+    });
 
-            <button class="tab-btn" data-tab="registerForm">
-                Register
-            </button>
-
-        </div>
-
-        <!-- LOGIN -->
-
-        <div class="tab-content active" id="loginForm">
-
-            <form>
-
-                <div class="form-group">
-                    <input
-                        type="email"
-                        placeholder="Email Address"
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        required
-                    >
-                </div>
-
-                <button type="submit" class="btn btn-primary">
-                    Login
-                </button>
-
-            </form>
-
-        </div>
-
-        <!-- REGISTER -->
-
-        <div class="tab-content" id="registerForm">
-
-            <form>
-
-                <div class="form-group">
-                    <input
-                        type="text"
-                        placeholder="Full Name"
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <input
-                        type="email"
-                        placeholder="Email Address"
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <input
-                        type="password"
-                        placeholder="Confirm Password"
-                        required
-                    >
-                </div>
-
-                <button type="submit" class="btn btn-primary">
-                    Create Account
-                </button>
-
-            </form>
-
-        </div>
-
-    </div>
-
-</div>
-
-<script src="js/main.js"></script>
-
+    // ===== Pagination =====
+    document.querySelectorAll('.page-btn:not(.arrow)').forEach(btn => {
+        btn.addEventListener('click', function () {
+            document.querySelectorAll('.page-btn').forEach(b => { b.classList.remove('active'); b.removeAttribute('aria-current'); });
+            this.classList.add('active');
+            this.setAttribute('aria-current', 'page');
+        });
+    });
+</script>
 </body>
 </html>
